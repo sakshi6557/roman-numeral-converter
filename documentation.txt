@@ -1,0 +1,214 @@
+Roman Numeral Converter - Project Documentation
+=============================================
+
+Project Overview
+---------------
+The Roman Numeral Converter is a full-stack web application that converts numbers to Roman numerals. 
+It features a modern React-based frontend with a TypeScript/Express backend, complete with monitoring 
+and documentation capabilities.
+
+Architecture
+-----------
+The project follows a client-server architecture with clear separation between frontend and backend components.
+
+Frontend (React + TypeScript)
+---------------------------
+Location: frontend/
+Technologies:
+1. React
+   - Purpose: UI framework for building interactive user interfaces
+   - Version: Latest
+   - Why chosen: 
+     - Component-based architecture for reusable UI elements
+     - Virtual DOM for efficient updates
+     - Large ecosystem and community support
+
+2. TypeScript
+   - Purpose: Type-safe JavaScript development
+   - Why chosen:
+     - Static typing for better code quality
+     - Enhanced IDE support
+     - Better maintainability and scalability
+     - Catches errors at compile time
+
+3. React Spectrum
+   - Purpose: UI component library
+   - Why chosen:
+     - Accessible components out of the box
+     - Consistent design system
+     - Built-in dark/light mode support
+     - Responsive design patterns
+
+4. Vite
+   - Purpose: Build tool and development server
+   - Why chosen:
+     - Fast development server
+     - Optimized production builds
+     - Native ES modules support
+     - Hot module replacement
+
+Backend (Express + TypeScript)
+----------------------------
+Location: backend/
+Technologies:
+1. Express
+   - Purpose: Web application framework
+   - Why chosen:
+     - Minimal and flexible
+     - Large middleware ecosystem
+     - Good performance
+     - Easy routing and middleware support
+
+2. TypeScript
+   - Purpose: Type-safe backend development
+   - Why chosen:
+     - Same benefits as frontend TypeScript
+     - Consistent language across stack
+     - Better API documentation
+
+3. Prometheus Client
+   - Purpose: Application metrics and monitoring
+   - Why chosen:
+     - Standard metrics format
+     - Easy integration with monitoring systems
+     - Built-in metrics types (counters, histograms)
+     - Low overhead
+
+4. Winston
+   - Purpose: Logging
+   - Why chosen:
+     - Flexible logging levels
+     - Multiple transport options
+     - Good performance
+     - Easy configuration
+
+Development Tools
+---------------
+1. ESLint
+   - Purpose: Code linting
+   - Why chosen:
+     - Enforces code style
+     - Catches potential errors
+     - Configurable rules
+     - TypeScript support
+
+2. Jest
+   - Purpose: Testing framework
+   - Why chosen:
+     - Simple setup
+     - Good TypeScript support
+     - Snapshot testing
+     - Coverage reporting
+
+3. TypeDoc
+   - Purpose: Documentation generation
+   - Why chosen:
+     - Automatic API documentation
+     - TypeScript support
+     - Customizable output
+     - Integration with JSDoc
+
+Project Structure
+---------------
+frontend/
+├── public/         # Static assets
+├── src/
+│   ├── components/ # React components
+│   ├── App.tsx     # Main application component
+│   └── main.tsx    # Application entry point
+└── package.json    # Frontend dependencies
+
+backend/
+├── src/
+│   ├── routes/     # API route handlers
+│   ├── services/   # Business logic
+│   ├── middleware/ # Express middleware
+│   └── app.ts      # Application entry point
+└── package.json    # Backend dependencies
+
+Key Features
+-----------
+1. Roman Numeral Conversion
+   - Input validation (1-3999)
+   - Proper Roman numeral rules implementation
+   - Error handling
+
+2. User Interface
+   - Responsive design
+   - Dark/light mode support
+   - Accessible components
+   - Error feedback
+
+3. Monitoring
+   - Request counting
+   - Response time tracking
+   - Error logging
+   - Performance metrics
+
+4. Documentation
+   - API documentation
+   - Type definitions
+   - Usage examples
+   - Error codes
+
+Development Workflow
+------------------
+1. Setup
+   - Clone repository
+   - Install dependencies (npm install)
+   - Configure environment variables
+
+2. Development
+   - Frontend: npm run dev (in frontend/)
+   - Backend: npm run dev (in backend/)
+   - Documentation: npm run docs (in backend/)
+
+3. Testing
+   - Unit tests: npm test
+   - Coverage: npm run test:coverage
+   - Linting: npm run lint
+
+4. Building
+   - Frontend: npm run build
+   - Backend: npm run build
+
+Deployment
+---------
+The application can be deployed using Docker containers:
+1. Build frontend and backend
+2. Create Docker images
+3. Deploy to container platform
+4. Configure environment variables
+5. Set up monitoring
+
+Future Improvements
+-----------------
+1. Frontend
+   - Add more input validation
+   - Implement offline support
+   - Add animations
+   - Improve error messages
+
+2. Backend
+   - Add rate limiting
+   - Implement caching
+   - Add more metrics
+   - Improve error handling
+
+3. Documentation
+   - Add more examples
+   - Include deployment guides
+   - Add architecture diagrams
+   - Document API versioning
+
+Contributing
+-----------
+1. Fork the repository
+2. Create feature branch
+3. Make changes
+4. Run tests
+5. Submit pull request
+
+License
+-------
+ISC License 

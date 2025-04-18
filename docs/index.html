@@ -1,0 +1,117 @@
+<!DOCTYPE html><html class="default" lang="en"><head><meta charSet="utf-8"/><meta http-equiv="x-ua-compatible" content="IE=edge"/><title>Roman Numeral Converter API - v1.0.0</title><meta name="description" content="Documentation for Roman Numeral Converter API"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="assets/style.css"/><link rel="stylesheet" href="assets/highlight.css"/><script defer src="assets/main.js"></script><script async src="assets/icons.js" id="tsd-icons-script"></script><script async src="assets/search.js" id="tsd-search-script"></script><script async src="assets/navigation.js" id="tsd-nav-script"></script></head><body><script>document.documentElement.dataset.theme = localStorage.getItem("tsd-theme") || "os";document.body.style.display="none";setTimeout(() => app?app.showPage():document.body.style.removeProperty("display"),500)</script><header class="tsd-page-toolbar"><div class="tsd-toolbar-contents container"><div class="table-cell" id="tsd-search" data-base="."><div class="field"><label for="tsd-search-field" class="tsd-widget tsd-toolbar-icon search no-caption"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><use href="assets/icons.svg#icon-search"></use></svg></label><input type="text" id="tsd-search-field" aria-label="Search"/></div><div class="field"><div id="tsd-toolbar-links"></div></div><ul class="results"><li class="state loading">Preparing search index...</li><li class="state failure">The search index is not available</li></ul><a href="index.html" class="title">Roman Numeral Converter API - v1.0.0</a></div><div class="table-cell" id="tsd-widgets"><a href="#" class="tsd-widget tsd-toolbar-icon menu no-caption" data-toggle="menu" aria-label="Menu"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><use href="assets/icons.svg#icon-menu"></use></svg></a></div></div></header><div class="container container-main"><div class="col-content"><div class="tsd-page-title"><h2>Roman Numeral Converter API - v1.0.0</h2></div><div class="tsd-panel tsd-typography"><a id="md:roman-numeral-converter" class="tsd-anchor"></a><h1><a href="#md:roman-numeral-converter">Roman Numeral Converter</a></h1><p>A full-stack application for converting numbers to Roman numerals, built with React and Express.js.</p>
+<a id="md:overview" class="tsd-anchor"></a><h2><a href="#md:overview">Overview</a></h2><p>This project consists of two main components:</p>
+<ul>
+<li>Frontend: A modern React application with React Spectrum UI</li>
+<li>Backend: A RESTful API built with Express.js and TypeScript</li>
+</ul>
+<a id="md:features" class="tsd-anchor"></a><h2><a href="#md:features">Features</a></h2><a id="md:frontend" class="tsd-anchor"></a><h3><a href="#md:frontend">Frontend</a></h3><ul>
+<li>Convert numbers to Roman numerals</li>
+<li>Responsive design</li>
+<li>Light and dark mode support</li>
+<li>System theme detection</li>
+<li>Error handling and input validation</li>
+<li>Clean and modern UI using React Spectrum</li>
+</ul>
+<a id="md:backend" class="tsd-anchor"></a><h3><a href="#md:backend">Backend</a></h3><ul>
+<li>RESTful API endpoints</li>
+<li>Input validation and error handling</li>
+<li>Prometheus metrics integration</li>
+<li>TypeScript support</li>
+<li>Comprehensive test coverage</li>
+<li>Docker support</li>
+</ul>
+<a id="md:prerequisites" class="tsd-anchor"></a><h2><a href="#md:prerequisites">Prerequisites</a></h2><ul>
+<li>Node.js (v14 or higher)</li>
+<li>npm (v6 or higher)</li>
+<li>Docker (optional, for containerized deployment)</li>
+</ul>
+<a id="md:project-structure" class="tsd-anchor"></a><h2><a href="#md:project-structure">Project Structure</a></h2><pre><code><span class="hl-0">roman</span><span class="hl-1">-</span><span class="hl-0">numeral</span><span class="hl-1">-</span><span class="hl-0">converter</span><span class="hl-1">/</span><br/><span class="hl-1">├── </span><span class="hl-0">frontend</span><span class="hl-1">/              # </span><span class="hl-0">React</span><span class="hl-1"> </span><span class="hl-0">frontend</span><span class="hl-1"> </span><span class="hl-0">application</span><br/><span class="hl-1">│   ├── </span><span class="hl-0">src</span><span class="hl-1">/</span><br/><span class="hl-1">│   │   ├── </span><span class="hl-0">components</span><span class="hl-1">/    # </span><span class="hl-0">React</span><span class="hl-1"> </span><span class="hl-0">components</span><br/><span class="hl-1">│   │   ├── </span><span class="hl-0">App</span><span class="hl-1">.</span><span class="hl-0">tsx</span><span class="hl-1">       # </span><span class="hl-0">Main</span><span class="hl-1"> </span><span class="hl-0">application</span><span class="hl-1"> </span><span class="hl-0">component</span><br/><span class="hl-1">│   │   └── </span><span class="hl-0">main</span><span class="hl-1">.</span><span class="hl-0">tsx</span><span class="hl-1">      # </span><span class="hl-0">Application</span><span class="hl-1"> </span><span class="hl-0">entry</span><span class="hl-1"> </span><span class="hl-0">point</span><br/><span class="hl-1">│   ├── </span><span class="hl-0">index</span><span class="hl-1">.</span><span class="hl-0">html</span><span class="hl-1">        # </span><span class="hl-2">HTML</span><span class="hl-1"> </span><span class="hl-0">template</span><br/><span class="hl-1">│   └── </span><span class="hl-0">package</span><span class="hl-1">.</span><span class="hl-0">json</span><span class="hl-1">      # </span><span class="hl-0">Frontend</span><span class="hl-1"> </span><span class="hl-0">dependencies</span><br/><span class="hl-1">│</span><br/><span class="hl-1">├── </span><span class="hl-0">backend</span><span class="hl-1">/              # </span><span class="hl-0">Express</span><span class="hl-1">.</span><span class="hl-0">js</span><span class="hl-1"> </span><span class="hl-0">backend</span><span class="hl-1"> </span><span class="hl-2">API</span><br/><span class="hl-1">│   ├── </span><span class="hl-0">src</span><span class="hl-1">/</span><br/><span class="hl-1">│   │   ├── </span><span class="hl-0">routes</span><span class="hl-1">/       # </span><span class="hl-2">API</span><span class="hl-1"> </span><span class="hl-0">route</span><span class="hl-1"> </span><span class="hl-0">handlers</span><br/><span class="hl-1">│   │   ├── </span><span class="hl-0">services</span><span class="hl-1">/     # </span><span class="hl-0">Business</span><span class="hl-1"> </span><span class="hl-0">logic</span><br/><span class="hl-1">│   │   └── </span><span class="hl-0">app</span><span class="hl-1">.</span><span class="hl-0">ts</span><span class="hl-1">       # </span><span class="hl-0">Express</span><span class="hl-1"> </span><span class="hl-0">application</span><span class="hl-1"> </span><span class="hl-0">setup</span><br/><span class="hl-1">│   ├── </span><span class="hl-0">tests</span><span class="hl-1">/           # </span><span class="hl-0">Test</span><span class="hl-1"> </span><span class="hl-0">files</span><br/><span class="hl-1">│   └── </span><span class="hl-0">package</span><span class="hl-1">.</span><span class="hl-0">json</span><span class="hl-1">     # </span><span class="hl-0">Backend</span><span class="hl-1"> </span><span class="hl-0">dependencies</span><br/><span class="hl-1">│</span><br/><span class="hl-1">└── </span><span class="hl-2">README</span><span class="hl-1">.</span><span class="hl-0">md</span><span class="hl-1">            # </span><span class="hl-0">This</span><span class="hl-1"> </span><span class="hl-0">file</span>
+</code><button>Copy</button></pre>
+<a id="md:getting-started" class="tsd-anchor"></a><h2><a href="#md:getting-started">Getting Started</a></h2><a id="md:clone-the-repository" class="tsd-anchor"></a><h3><a href="#md:clone-the-repository">Clone the Repository</a></h3><pre><code class="language-bash"><span class="hl-3">git</span><span class="hl-1"> </span><span class="hl-4">clone</span><span class="hl-1"> &lt;</span><span class="hl-4">repository-ur</span><span class="hl-1">l&gt;</span><br/><span class="hl-3">cd</span><span class="hl-1"> </span><span class="hl-4">roman-numeral-converter</span>
+</code><button>Copy</button></pre>
+<a id="md:frontend-setup" class="tsd-anchor"></a><h3><a href="#md:frontend-setup">Frontend Setup</a></h3><ol>
+<li><p>Navigate to the frontend directory:</p>
+<pre><code class="language-bash"><span class="hl-3">cd</span><span class="hl-1"> </span><span class="hl-4">frontend</span>
+</code><button>Copy</button></pre>
+</li>
+<li><p>Install dependencies:</p>
+<pre><code class="language-bash"><span class="hl-3">npm</span><span class="hl-1"> </span><span class="hl-4">install</span>
+</code><button>Copy</button></pre>
+</li>
+<li><p>Start the development server:</p>
+<pre><code class="language-bash"><span class="hl-3">npm</span><span class="hl-1"> </span><span class="hl-4">run</span><span class="hl-1"> </span><span class="hl-4">dev</span>
+</code><button>Copy</button></pre>
+<p>The frontend will be available at <code>http://localhost:5173</code></p>
+</li>
+</ol>
+<a id="md:backend-setup" class="tsd-anchor"></a><h3><a href="#md:backend-setup">Backend Setup</a></h3><ol>
+<li><p>Navigate to the backend directory:</p>
+<pre><code class="language-bash"><span class="hl-3">cd</span><span class="hl-1"> </span><span class="hl-4">backend</span>
+</code><button>Copy</button></pre>
+</li>
+<li><p>Install dependencies:</p>
+<pre><code class="language-bash"><span class="hl-3">npm</span><span class="hl-1"> </span><span class="hl-4">install</span>
+</code><button>Copy</button></pre>
+</li>
+<li><p>Start the development server:</p>
+<pre><code class="language-bash"><span class="hl-3">npm</span><span class="hl-1"> </span><span class="hl-4">run</span><span class="hl-1"> </span><span class="hl-4">dev</span>
+</code><button>Copy</button></pre>
+<p>The API will be available at <code>http://localhost:8080</code></p>
+</li>
+</ol>
+<a id="md:api-documentation" class="tsd-anchor"></a><h2><a href="#md:api-documentation">API Documentation</a></h2><a id="md:convert-number-to-roman-numeral" class="tsd-anchor"></a><h3><a href="#md:convert-number-to-roman-numeral">Convert Number to Roman Numeral</a></h3><pre><code><span class="hl-2">GET</span><span class="hl-1"> /</span><span class="hl-0">romannumeral</span><span class="hl-1">?</span><span class="hl-0">query</span><span class="hl-1">={</span><span class="hl-0">number</span><span class="hl-1">}</span>
+</code><button>Copy</button></pre>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>query</code> (required): The number to convert (1-3999)</li>
+</ul>
+<p><strong>Success Response:</strong></p>
+<pre><code class="language-json"><span class="hl-1">{</span><br/><span class="hl-1">  </span><span class="hl-5">&quot;input&quot;</span><span class="hl-1">: </span><span class="hl-4">&quot;42&quot;</span><span class="hl-1">,</span><br/><span class="hl-1">  </span><span class="hl-5">&quot;output&quot;</span><span class="hl-1">: </span><span class="hl-4">&quot;XLII&quot;</span><br/><span class="hl-1">}</span>
+</code><button>Copy</button></pre>
+<p><strong>Error Responses:</strong></p>
+<ul>
+<li>400 Bad Request:<ul>
+<li>Missing query parameter</li>
+<li>Invalid input (non-numeric)</li>
+<li>Out of range number</li>
+<li>Decimal number</li>
+</ul>
+</li>
+</ul>
+<a id="md:metrics" class="tsd-anchor"></a><h3><a href="#md:metrics">Metrics</a></h3><pre><code><span class="hl-2">GET</span><span class="hl-1"> /</span><span class="hl-0">metrics</span>
+</code><button>Copy</button></pre>
+<p>Returns Prometheus metrics including request count, duration, and error rates.</p>
+<a id="md:development" class="tsd-anchor"></a><h2><a href="#md:development">Development</a></h2><a id="md:frontend-development" class="tsd-anchor"></a><h3><a href="#md:frontend-development">Frontend Development</a></h3><pre><code class="language-bash"><span class="hl-3">cd</span><span class="hl-1"> </span><span class="hl-4">frontend</span><br/><span class="hl-3">npm</span><span class="hl-1"> </span><span class="hl-4">run</span><span class="hl-1"> </span><span class="hl-4">dev</span>
+</code><button>Copy</button></pre>
+<a id="md:backend-development" class="tsd-anchor"></a><h3><a href="#md:backend-development">Backend Development</a></h3><pre><code class="language-bash"><span class="hl-3">cd</span><span class="hl-1"> </span><span class="hl-4">backend</span><br/><span class="hl-3">npm</span><span class="hl-1"> </span><span class="hl-4">run</span><span class="hl-1"> </span><span class="hl-4">dev</span>
+</code><button>Copy</button></pre>
+<a id="md:testing" class="tsd-anchor"></a><h2><a href="#md:testing">Testing</a></h2><a id="md:frontend-tests" class="tsd-anchor"></a><h3><a href="#md:frontend-tests">Frontend Tests</a></h3><pre><code class="language-bash"><span class="hl-3">cd</span><span class="hl-1"> </span><span class="hl-4">frontend</span><br/><span class="hl-3">npm</span><span class="hl-1"> </span><span class="hl-4">test</span>
+</code><button>Copy</button></pre>
+<a id="md:backend-tests" class="tsd-anchor"></a><h3><a href="#md:backend-tests">Backend Tests</a></h3><pre><code class="language-bash"><span class="hl-3">cd</span><span class="hl-1"> </span><span class="hl-4">backend</span><br/><span class="hl-3">npm</span><span class="hl-1"> </span><span class="hl-4">test</span>
+</code><button>Copy</button></pre>
+<a id="md:docker-deployment" class="tsd-anchor"></a><h2><a href="#md:docker-deployment">Docker Deployment</a></h2><a id="md:frontend-1" class="tsd-anchor"></a><h3><a href="#md:frontend-1">Frontend</a></h3><pre><code class="language-bash"><span class="hl-3">cd</span><span class="hl-1"> </span><span class="hl-4">frontend</span><br/><span class="hl-3">docker</span><span class="hl-1"> </span><span class="hl-4">build</span><span class="hl-1"> </span><span class="hl-6">-t</span><span class="hl-1"> </span><span class="hl-4">roman-numeral-converter-frontend</span><span class="hl-1"> </span><span class="hl-4">.</span><br/><span class="hl-3">docker</span><span class="hl-1"> </span><span class="hl-4">run</span><span class="hl-1"> </span><span class="hl-6">-p</span><span class="hl-1"> </span><span class="hl-7">5173</span><span class="hl-4">:5173</span><span class="hl-1"> </span><span class="hl-4">roman-numeral-converter-frontend</span>
+</code><button>Copy</button></pre>
+<a id="md:backend-1" class="tsd-anchor"></a><h3><a href="#md:backend-1">Backend</a></h3><pre><code class="language-bash"><span class="hl-3">cd</span><span class="hl-1"> </span><span class="hl-4">backend</span><br/><span class="hl-3">docker</span><span class="hl-1"> </span><span class="hl-4">build</span><span class="hl-1"> </span><span class="hl-6">-t</span><span class="hl-1"> </span><span class="hl-4">roman-numeral-converter-backend</span><span class="hl-1"> </span><span class="hl-4">.</span><br/><span class="hl-3">docker</span><span class="hl-1"> </span><span class="hl-4">run</span><span class="hl-1"> </span><span class="hl-6">-p</span><span class="hl-1"> </span><span class="hl-7">8080</span><span class="hl-4">:8080</span><span class="hl-1"> </span><span class="hl-4">roman-numeral-converter-backend</span>
+</code><button>Copy</button></pre>
+<a id="md:technologies-used" class="tsd-anchor"></a><h2><a href="#md:technologies-used">Technologies Used</a></h2><a id="md:frontend-2" class="tsd-anchor"></a><h3><a href="#md:frontend-2">Frontend</a></h3><ul>
+<li><a href="https://reactjs.org/">React</a> - UI library</li>
+<li><a href="https://www.typescriptlang.org/">TypeScript</a> - Type-safe JavaScript</li>
+<li><a href="https://react-spectrum.adobe.com/">React Spectrum</a> - UI components</li>
+<li><a href="https://vitejs.dev/">Vite</a> - Build tool and development server</li>
+</ul>
+<a id="md:backend-2" class="tsd-anchor"></a><h3><a href="#md:backend-2">Backend</a></h3><ul>
+<li><a href="https://expressjs.com/">Express.js</a> - Web framework</li>
+<li><a href="https://www.typescriptlang.org/">TypeScript</a> - Type-safe JavaScript</li>
+<li><a href="https://jestjs.io/">Jest</a> - Testing framework</li>
+<li><a href="https://prometheus.io/">Prometheus</a> - Metrics collection</li>
+<li><a href="https://www.docker.com/">Docker</a> - Containerization</li>
+</ul>
+<a id="md:contributing" class="tsd-anchor"></a><h2><a href="#md:contributing">Contributing</a></h2><ol>
+<li>Fork the repository</li>
+<li>Create a feature branch</li>
+<li>Commit your changes</li>
+<li>Push to the branch</li>
+<li>Create a Pull Request</li>
+</ol>
+<a id="md:license" class="tsd-anchor"></a><h2><a href="#md:license">License</a></h2><p>This project is licensed under the MIT License - see the LICENSE file for details.</p>
+</div></div><div class="col-sidebar"><div class="page-menu"><div class="tsd-navigation settings"><details class="tsd-index-accordion"><summary class="tsd-accordion-summary"><h3><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><use href="assets/icons.svg#icon-chevronDown"></use></svg>Settings</h3></summary><div class="tsd-accordion-details"><div class="tsd-filter-visibility"><h4 class="uppercase">Member Visibility</h4><form><ul id="tsd-filter-options"><li class="tsd-filter-item"><label class="tsd-filter-input"><input type="checkbox" id="tsd-filter-inherited" name="inherited" checked/><svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect class="tsd-checkbox-background" width="30" height="30" x="1" y="1" rx="6" fill="none"></rect><path class="tsd-checkbox-checkmark" d="M8.35422 16.8214L13.2143 21.75L24.6458 10.25" stroke="none" stroke-width="3.5" stroke-linejoin="round" fill="none"></path></svg><span>Inherited</span></label></li></ul></form></div><div class="tsd-theme-toggle"><h4 class="uppercase">Theme</h4><select id="tsd-theme"><option value="os">OS</option><option value="light">Light</option><option value="dark">Dark</option></select></div></div></details></div><details open class="tsd-index-accordion tsd-page-navigation"><summary class="tsd-accordion-summary"><h3><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><use href="assets/icons.svg#icon-chevronDown"></use></svg>On This Page</h3></summary><div class="tsd-accordion-details"><a href="#md:roman-numeral-converter"><span>Roman <wbr/>Numeral <wbr/>Converter</span></a><ul><li><a href="#md:overview"><span>Overview</span></a></li><li><a href="#md:features"><span>Features</span></a></li><li><ul><li><a href="#md:frontend"><span>Frontend</span></a></li><li><a href="#md:backend"><span>Backend</span></a></li></ul></li><li><a href="#md:prerequisites"><span>Prerequisites</span></a></li><li><a href="#md:project-structure"><span>Project <wbr/>Structure</span></a></li><li><a href="#md:getting-started"><span>Getting <wbr/>Started</span></a></li><li><ul><li><a href="#md:clone-the-repository"><span>Clone the <wbr/>Repository</span></a></li><li><a href="#md:frontend-setup"><span>Frontend <wbr/>Setup</span></a></li><li><a href="#md:backend-setup"><span>Backend <wbr/>Setup</span></a></li></ul></li><li><a href="#md:api-documentation"><span>API <wbr/>Documentation</span></a></li><li><ul><li><a href="#md:convert-number-to-roman-numeral"><span>Convert <wbr/>Number to <wbr/>Roman <wbr/>Numeral</span></a></li><li><a href="#md:metrics"><span>Metrics</span></a></li></ul></li><li><a href="#md:development"><span>Development</span></a></li><li><ul><li><a href="#md:frontend-development"><span>Frontend <wbr/>Development</span></a></li><li><a href="#md:backend-development"><span>Backend <wbr/>Development</span></a></li></ul></li><li><a href="#md:testing"><span>Testing</span></a></li><li><ul><li><a href="#md:frontend-tests"><span>Frontend <wbr/>Tests</span></a></li><li><a href="#md:backend-tests"><span>Backend <wbr/>Tests</span></a></li></ul></li><li><a href="#md:docker-deployment"><span>Docker <wbr/>Deployment</span></a></li><li><ul><li><a href="#md:frontend-1"><span>Frontend</span></a></li><li><a href="#md:backend-1"><span>Backend</span></a></li></ul></li><li><a href="#md:technologies-used"><span>Technologies <wbr/>Used</span></a></li><li><ul><li><a href="#md:frontend-2"><span>Frontend</span></a></li><li><a href="#md:backend-2"><span>Backend</span></a></li></ul></li><li><a href="#md:contributing"><span>Contributing</span></a></li><li><a href="#md:license"><span>License</span></a></li></ul></div></details></div><div class="site-menu"><nav class="tsd-navigation"><a href="modules.html" class="current"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="assets/icons.svg#icon-1"></use></svg><span>Roman Numeral Converter API - v1.0.0</span></a><ul class="tsd-small-nested-navigation" id="tsd-nav-container" data-base="."><li>Loading...</li></ul></nav></div></div></div><footer></footer><div class="overlay"></div></body></html>

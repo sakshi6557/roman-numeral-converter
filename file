@@ -1,0 +1,58 @@
+Adobe GenStudio for Performance Marketing Engineering Test
+We follow an open development model with a diverse engineering team that spans the
+globe. Every engineer is empowered to contribute to any part of the codebase and
+engage in asynchronous communication.
+To assess your programming skills, communication, and web technology knowledge, we
+ask that you build a web service and corresponding UI that accepts a number and
+outputs a Roman numeral.
+Requirements
+• Treat this project as you would any serious engineering effort for your employer.
+• Your web service must accept requests in the format:
+o http://localhost:8080/romannumeral?query={integer}
+▪ {integer} must be a whole number between 1-3999. Errors can be returned in
+plain text format, but successful responses must include a JSON payload with
+“input” and “output” string properties. For example, if the input is 1, the response
+must be a JSON document equivalent to: {“input”: “1”, “output”: “I”}
+• Your UI must be a React application.
+• The application must utilize components from Adobe’s React Spectrum library:
+https://react-spectrum.adobe.com/react-spectrum/index.html. You may incorporate
+components from other libraries if needed, but the interface should consist of React
+Spectrum components as much as possible.
+• The UI must at least contain:
+o An input that accepts a number.
+o A button that, when clicked, sends a request to your web service to convert the
+specified number into a Roman numeral.
+o A display field that shows the Roman numeral output once it is available.
+• The application must render in both light and dark mode, depending on the system
+settings.
+• The solution must implement the 3 pillars of observability: logs, metrics, and traces.
+The specifics are flexible; feel free to use any techniques or technologies that you
+would normally use when planning to support software running in a production
+environment.
+• The project must include a runnable Docker container that launches your solution and
+any of its dependencies.
+
+© Copyright 2025, Adobe, Inc. All Rights Reserved.
+Example
+The screenshots below show an example of what your app might look like. These are
+only guidelines; your app does not need to match these designs exactly.
+
+Rules
+• Do not use existing code or libraries for the Roman numeral conversion itself. We
+want to see your development methodology in action.
+• Write your project in TypeScript or JavaScript. Please respond to the email
+accompanying this test to receive approval before working in any other language.
+• Host your work in a public GitHub repository and include the link in your response.
+• You may use publicly available frameworks for things like hosting your webserver,
+running tests, logging, sending metrics, etc.
+• Your documentation should identify and explain your reasoning for choosing the
+dependencies, frameworks, or technologies that you use.
+Tips for a Good Score
+• Find and reference a Roman numeral specification. Wikipedia is acceptable.
+• Provide clear and concise documentation that describes how to build and run your
+project, how you approached the problem and chose your solution, how your project
+is organized, and any other information you think may be valuable.
+• Include inline source code documentation at a level that assumes someone else may
+need to eventually maintain your project.
+• Include automated tests with your project.
+• Properly anticipate and handle error cases.

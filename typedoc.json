@@ -1,0 +1,32 @@
+{
+  "entryPoints": ["backend/src/app.ts"],
+  "entryPointStrategy": "expand",
+  "out": "docs",
+  "exclude": [
+    "**/__tests__/**/*",
+    "**/node_modules/**/*",
+    "**/dist/**/*"
+  ],
+  "includeVersion": true,
+  "name": "Roman Numeral Converter API",
+  "readme": "README.md",
+  "theme": "default",
+  "excludePrivate": true,
+  "excludeProtected": true,
+  "excludeExternals": true,
+  "hideGenerator": true,
+  "tsconfig": "backend/tsconfig.json",
+  "categorizeByGroup": true,
+  "defaultCategory": "Core",
+  "categoryOrder": [
+    "Core",
+    "Routes",
+    "Services",
+    "Utils"
+  ],
+  "sort": [
+    "source-order",
+    "required-first",
+    "visibility"
+  ]
+} 
