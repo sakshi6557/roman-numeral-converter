@@ -55,7 +55,29 @@ roman-numeral-converter/
 └── README.md            # This file
 ```
 
-## Getting Started
+
+## Getting Started 
+
+### 1. Make sure Docker & Docker Compose are installed
+
+### 2. Clone the Repository
+      ```bash
+      git clone <repository-url>
+      cd roman-numeral-converter
+      ```
+
+### 3. Create a .env.production file in the backend folder
+
+### 4. Run the project
+      ```bash
+      docker-compose up --build
+      ```
+### 5. Access the app in your browser
+  
+   The frontend will be available at `http://localhost` and the backend API will be available at `http://localhost:3000`
+
+
+## Getting Started - (Without Docker)
 
 ### Clone the Repository
 ```bash
@@ -85,17 +107,19 @@ cd roman-numeral-converter
    ```bash
    cd backend
    ```
-
+   
 2. Install dependencies:
    ```bash
    npm install
    ```
-
-3. Start the development server:
+   
+3. Start the production server:
    ```bash
-   npm run dev
+   npm run start
    ```
+   
    The API will be available at `http://localhost:8080`
+
 
 ## API Documentation
 
@@ -154,22 +178,6 @@ npm test
 ```bash
 cd backend
 npm test
-```
-
-## Docker Deployment
-
-### Frontend
-```bash
-cd frontend
-docker build -t roman-numeral-converter-frontend .
-docker run -p 5173:5173 roman-numeral-converter-frontend
-```
-
-### Backend
-```bash
-cd backend
-docker build -t roman-numeral-converter-backend .
-docker run -p 8080:8080 roman-numeral-converter-backend
 ```
 
 ## Technologies Used
