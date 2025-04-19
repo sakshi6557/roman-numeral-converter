@@ -61,17 +61,17 @@ roman-numeral-converter/
 ### 1. Make sure Docker & Docker Compose are installed
 
 ### 2. Clone the Repository
-      ```bash
+```bash
       git clone <repository-url>
       cd roman-numeral-converter
-      ```
+```
 
 ### 3. Create a .env.production file in the backend folder
 
 ### 4. Run the project
-      ```bash
+```bash
       docker-compose up --build
-      ```
+```
 ### 5. Access the app in your browser
   
    The frontend will be available at `http://localhost` and the backend API will be available at `http://localhost:3000`
