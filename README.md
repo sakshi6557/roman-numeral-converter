@@ -4,11 +4,17 @@ A full-stack application for converting numbers to Roman numerals, built with Re
 
 ## Table of Contents
 
-- 1. [Overview](#overview)
-- 2. [Features](#features)
-- 3. [Prerequisites](#Prerequisites)
-- 4. [Project-Structure](#Project-Structure)
-- 5. [Getting-Started](#Getting-Started)
+- [Overview](#overview)
+- [Features](#features)
+- [Prerequisites](#Prerequisites)
+- [Project-Structure](#Project-Structure)
+- [Getting-Started](#Getting-Started)
+- [API-Documentation](#API-Documentation)
+- [Development-mode](#Development-mode)
+- [Testing](#Testing)
+- [Documentation](#Documentation)
+- [Technologies-Used](#Technologies-Used)
+
 
 ## Overview
 
@@ -170,7 +176,7 @@ GET /metrics
 ```
 Returns Prometheus metrics including request count, duration, and error rates.
 
-## Development
+## Development mode
 
 ### Frontend Development
 ```bash
