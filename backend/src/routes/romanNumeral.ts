@@ -11,9 +11,9 @@
  */
 
 import { RequestHandler } from 'express';
-import { toRoman } from '../services/romanConverter.js';
-import { requestCount, httpRequestDurationMicroseconds } from '../services/metrics.js';
-import logger from '../services/logger.js';
+import { toRoman } from '../services/romanConverter';
+import { requestCount, httpRequestDurationMicroseconds } from '../services/metrics';
+import logger from '../services/logger';
 
 /**
  * Handles requests to convert numbers to Roman numerals.
