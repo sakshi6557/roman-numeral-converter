@@ -5,11 +5,12 @@
  * @module app
  * @category Core
  */
+import './traces.js';
 
 import express from 'express';
 import cors from 'cors';
-import { romanNumeralHandler } from './routes/romanNumeral';
-import { requestCount, httpRequestDurationMicroseconds, register } from './services/metrics';
+import { romanNumeralHandler } from './routes/romanNumeral.js';
+import { requestCount, httpRequestDurationMicroseconds, register } from './services/metrics.js';
 import dotenv from 'dotenv';
 
 // Load environment variables based on NODE_ENV
