@@ -49,9 +49,13 @@ roman-numeral-converter/
 │   │   ├── routes/       # API route handlers
 │   │   ├── services/     # Business logic
 │   │   └── app.ts       # Express application setup
-│   ├── tests/           # Test files
 │   └── package.json     # Backend dependencies
 │
+├── docs/
+|   ├── index.html        # Generated documentation for project
+|   └── modules.html      # Documentation
+|
+|
 └── README.md            # This file
 ```
 
@@ -62,7 +66,7 @@ roman-numeral-converter/
 
 ### 2. Clone the Repository
 ```bash
-      git clone <repository-url>
+      git clone https://github.com/sakshi6557/roman-numeral-converter.git
       cd roman-numeral-converter
 ```
 
@@ -74,14 +78,14 @@ roman-numeral-converter/
 ```
 ### 5. Access the app in your browser
   
-   The frontend will be available at `http://localhost` and the backend API will be available at `http://localhost:3000`
+   The frontend will be available at `http://localhost:8081` and the backend API will be available at `http://localhost:8080`
 
 
 ## Getting Started - (Without Docker)
 
 ### Clone the Repository
 ```bash
-git clone <repository-url>
+git clone https://github.com/sakshi6557/roman-numeral-converter.git
 cd roman-numeral-converter
 ```
 
@@ -100,7 +104,7 @@ cd roman-numeral-converter
    ```bash
    npm run dev
    ```
-   The frontend will be available at `http://localhost:5173`
+   The frontend will be available at `http://localhost:8081`
 
 ### Backend Setup
 1. Navigate to the backend directory:
@@ -122,6 +126,12 @@ cd roman-numeral-converter
 
 
 ## API Documentation
+
+### API Information
+```
+/
+```
+Returns information about the endpoints
 
 ### Convert Number to Roman Numeral
 ```
@@ -180,6 +190,25 @@ cd backend
 npm test
 ```
 
+### Documentation
+1. To create a basic documentation:
+      ```bash
+      cd backend
+      npm run docs
+      ```
+      or
+      ```bash
+      cd backend
+      npm run docs:build
+      ```
+2. To clean and build again:
+      ```bash
+      cd backend
+      npm run docs:clean
+      npm run docs:build
+      ```
+   Generates `index.html` file in the /docs folder
+
 ## Technologies Used
 
 ### Frontend
@@ -194,15 +223,3 @@ npm test
 - [Jest](https://jestjs.io/) - Testing framework
 - [Prometheus](https://prometheus.io/) - Metrics collection
 - [Docker](https://www.docker.com/) - Containerization
-
-## Contributing
-
-1. Fork the repository
-2. Create a feature branch
-3. Commit your changes
-4. Push to the branch
-5. Create a Pull Request
-
-## License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
