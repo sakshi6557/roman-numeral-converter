@@ -32,7 +32,8 @@ export function RomanNumeralConverter({ isDark, onThemeChange }: RomanNumeralCon
 
   const handleConvert = async () => {
     try {
-      const response = await axios.get(`${import.meta.env.VITE_API_URL}/romannumeral?query=${input}`);
+      const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:8080';
+      const response = await axios.get(`${apiUrl}/romannumeral?query=${input}`);
       setOutput(response.data.output);
       setError(null);
     } catch (err: any) {

@@ -1,6 +1,7 @@
 
 services:
   backend:
+    image: sakshi6557/roman-numeral-service:latest
     build: ./backend
     ports:
       - "8080:8080"
@@ -12,6 +13,7 @@ services:
       - app-network
 
   frontend:
+    image: sakshi6557/roman-numeral-frontend:latest
     build: ./frontend
     ports:
       - "8081:80"
