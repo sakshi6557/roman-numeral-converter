@@ -69,12 +69,13 @@ roman-numeral-converter/
 |   ├── index.html        # Generated documentation for project
 |   └── modules.html      # Documentation
 |
+├── typedoc.json
 |
 └── README.md            # This file
 ```
 
 
-## Getting Started 
+## Getting Started - (With Docker)
 
 ### 1. Make sure Docker & Docker Compose are installed
 
@@ -84,7 +85,7 @@ roman-numeral-converter/
       cd roman-numeral-converter
 ```
 
-### 3. Create a .env.production file in the backend folder
+### 3. Create a .env.production file in the backend folder and .env file in the frontend folder
 
 ### 4. Run the project
 ```bash
@@ -158,17 +159,22 @@ GET /romannumeral?query={number}
 **Success Response:**
 ```json
 {
-  "input": "42",
-  "output": "XLII"
+"input": "10",
+"output": "X",
+"statusCode":200,
+"statusText": "OK",
+"requestId": "kdu7pq",
+"duration": "1ms"
 }
 ```
 
 **Error Responses:**
-- 400 Bad Request:
+- 400 Bad Request
   - Missing query parameter
   - Invalid input (non-numeric)
   - Out of range number
   - Decimal number
+- 500 InternalServerError
 
 ### Metrics
 ```
@@ -236,4 +242,5 @@ npm test
 - [TypeScript](https://www.typescriptlang.org/) - Type-safe JavaScript
 - [Jest](https://jestjs.io/) - Testing framework
 - [Prometheus](https://prometheus.io/) - Metrics collection
+- [OpenTelemetry](https://opentelemetry.io/) - Traces collection
 - [Docker](https://www.docker.com/) - Containerization
