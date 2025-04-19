@@ -2,6 +2,14 @@
 
 A full-stack application for converting numbers to Roman numerals, built with React and Express.js.
 
+## Table of Contents
+
+- 1. [Overview](#overview)
+- 2. [Features](#features)
+- 3. [Prerequisites](#Prerequisites)
+- 4. [Project-Structure](#Project-Structure)
+- 5. [Getting-Started](#Getting-Started)
+
 ## Overview
 
 This project consists of two main components:
