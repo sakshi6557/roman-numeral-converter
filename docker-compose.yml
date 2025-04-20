@@ -19,6 +19,7 @@ services:
       - "8081:80"
     environment:
       - VITE_API_URL=http://localhost:8080
+      - VITE_ENV=production
     depends_on:
       - backend
     networks:

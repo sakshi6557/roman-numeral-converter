@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import {
   TextField,
   Button,
@@ -12,11 +12,17 @@ import {
 } from '@adobe/react-spectrum';
 import axios from 'axios';
 
+/**
+ * Interface for the RomanNumeralConverter component props
+ */
 interface RomanNumeralConverterProps {
   isDark: boolean;
   onThemeChange: (isDark: boolean) => void;
 }
 
+/**
+ * Interface for error responses from the API
+ */
 interface ErrorResponse {
   error: string;
   message: string;
@@ -25,20 +31,68 @@ interface ErrorResponse {
   requestId: string;
 }
 
+/**
+ * RomanNumeralConverter Component
+ * 
+ * A React component that converts numbers to Roman numerals using Adobe React Spectrum components.
+ * Features:
+ * - Light/dark mode support
+ * - Input validation
+ * - Error handling
+ * - Performance metrics
+ * 
+ * @param {RomanNumeralConverterProps} props - Component props
+ * @returns {JSX.Element} The rendered component
+ */
 export function RomanNumeralConverter({ isDark, onThemeChange }: RomanNumeralConverterProps) {
   const [input, setInput] = useState<string>('');
   const [output, setOutput] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
 
+  // Log component mount and theme changes
+  useEffect(() => {
+    console.log(`[RomanNumeralConverter] Component mounted in ${isDark ? 'dark' : 'light'} mode`);
+    return () => {
+      console.log('[RomanNumeralConverter] Component unmounted');
+    };
+  }, [isDark]);
+
+  /**
+   * Handles the conversion of a number to Roman numeral
+   * Logs performance metrics and errors
+   */
   const handleConvert = async () => {
+    const startTime = performance.now();
     try {
+      console.log(`[RomanNumeralConverter] Converting number: ${input}`);
       const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:8080';
       const response = await axios.get(`${apiUrl}/romannumeral?query=${input}`);
+      
+      const endTime = performance.now();
+      const conversionDuration = endTime - startTime;
+      
+      // Enhanced logging with metrics
+      console.log(`[RomanNumeralConverter] Conversion successful: ${input} -> ${response.data.output}`, {
+        duration: `${conversionDuration.toFixed(2)}ms`,
+        timestamp: new Date().toISOString(),
+        input,
+        output: response.data.output
+      });
+      
       setOutput(response.data.output);
       setError(null);
     } catch (err: any) {
       const errorResponse = err.response?.data as ErrorResponse;
-      setError(errorResponse?.message || 'An unexpected error occurred');
+      const errorMessage = errorResponse?.message || 'An unexpected error occurred';
+      
+      console.error(`[RomanNumeralConverter] Conversion error: ${errorMessage}`, {
+        input,
+        statusCode: err.response?.status,
+        requestId: errorResponse?.requestId,
+        timestamp: new Date().toISOString()
+      });
+      
+      setError(errorMessage);
       setOutput(null);
     }
   };
@@ -76,6 +130,7 @@ export function RomanNumeralConverter({ isDark, onThemeChange }: RomanNumeralCon
               <Switch
                 isSelected={isDark}
                 onChange={onThemeChange}
+                aria-label="Toggle dark mode"
               />
             </Flex>
           </Flex>
@@ -96,11 +151,13 @@ export function RomanNumeralConverter({ isDark, onThemeChange }: RomanNumeralCon
               width="size-3600"
               validationState={error ? "invalid" : undefined}
               errorMessage={error}
+              aria-label="Number input"
             />
             <Button 
               variant="cta" 
               onPress={handleConvert}
               isDisabled={!input}
+              aria-label="Convert number to roman numeral"
             >
               Convert to roman numeral
             </Button>

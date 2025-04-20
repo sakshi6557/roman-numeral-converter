@@ -40,15 +40,18 @@ const ROMAN_MAP: [number, string][] = [
  * toRoman(3999);
  * 
  */
+
 export function toRoman(num: number): string {
-  
   let result = '';
-  // Iterate through the mapping, subtracting values and building the result
   for (const [val, sym] of ROMAN_MAP) {
-    while (num >= val) {
-      result += sym;
-      num -= val;
+    const count = Math.floor(num / val);
+    if (count > 0) {
+      result += sym.repeat(count);
+      num %= val;
     }
   }
   return result;
-} 
+}
+
+//Time Complexity: O(n)
+//Space Complexity: O(1)

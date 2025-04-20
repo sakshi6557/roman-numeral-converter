@@ -70,6 +70,7 @@ export const romanNumeralHandler: RequestHandler = async (req, res) => {
       logger.warn(`[${requestId}] Missing query parameter`);
       res.status(400).json({
         error: 'MissingParameter',
+        input: query,
         message: 'Please provide a number using the query parameter.',
         statusCode: 400,
         statusText: 'Bad Request',
@@ -83,6 +84,7 @@ export const romanNumeralHandler: RequestHandler = async (req, res) => {
       logger.warn(`[${requestId}] Invalid query parameter type: ${typeof query}`);
       res.status(400).json({
         error: 'InvalidParameterType',
+        input: query,
         message: 'Query parameter must be a string.',
         statusCode: 400,
         statusText: 'Bad Request',
@@ -97,6 +99,7 @@ export const romanNumeralHandler: RequestHandler = async (req, res) => {
       logger.warn(`[${requestId}] Invalid number input: ${query}`);
       res.status(400).json({
         error: 'InvalidNumber',
+        input: query,
         message: 'Invalid input. Please provide a valid number.',
         statusCode: 400,
         statusText: 'Bad Request',
@@ -110,6 +113,7 @@ export const romanNumeralHandler: RequestHandler = async (req, res) => {
       logger.warn(`[${requestId}] Decimal number input: ${num}`);
       res.status(400).json({
         error: 'DecimalNumber',
+        input: query,
         message: 'Please provide a whole number (no decimals).',
         statusCode: 400,
         statusText: 'Bad Request',
@@ -123,6 +127,7 @@ export const romanNumeralHandler: RequestHandler = async (req, res) => {
       logger.warn(`[${requestId}] Number out of range: ${num}`);
       res.status(400).json({
         error: 'OutOfRange',
+        input: query,
         message: 'Number must be between 1 and 3999.',
         statusCode: 400,
         statusText: 'Bad Request',

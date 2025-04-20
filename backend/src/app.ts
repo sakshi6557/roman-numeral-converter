@@ -26,7 +26,7 @@ const app = express();
 
 // CORS configuration
 app.use(cors({
-  origin: process.env.CORS_ORIGIN || 'http://localhost',
+  origin: process.env.CORS_ORIGIN || 'http://localhost:8081',
   methods: ['GET'],
 }));
 
