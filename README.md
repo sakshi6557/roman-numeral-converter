@@ -10,7 +10,7 @@ A full-stack application for converting numbers to Roman numerals, built with Re
 - [Project-Structure](#Project-Structure)
 - [Getting-Started](#Getting-Started)
 - [API-Documentation](#API-Documentation)
-- [Development-mode](#Development-mode)
+- [User-Interface](#User-Interface)
 - [Testing](#Testing)
 - [Observability-Features](#Observability-Features)
 - [Documentation](#Documentation)
@@ -216,6 +216,36 @@ GET /metrics
 Returns Prometheus metrics including request count, duration, and error rates.
 
 ![image](https://github.com/user-attachments/assets/b674e473-e8f6-4256-81d4-7c2a1783c59c)
+
+
+## User-Interface
+
+The initial design on Figma: 
+
+![image](https://github.com/user-attachments/assets/f28d99bb-b74d-420c-9295-8c106f0a9bab)
+
+The UI after development:
+      - The toggle button changes dark mode to light mode; by default, it is set to match the system's mode.
+      - The Convert to Roman Numeral button is enabled when a user enters text in the text field.
+
+![image](https://github.com/user-attachments/assets/f5f6a0d1-2896-46b3-85ec-be14d0cd03a4)
+
+The light mode of user interface:
+
+![image](https://github.com/user-attachments/assets/09be375e-271f-4a61-853b-06c17d82105a)
+
+
+The toggle button for changing the mode of the user interface:
+
+
+![image](https://github.com/user-attachments/assets/c26320a8-210f-4ead-89d5-e78891d62470)
+
+User Interface on Iphone 12 Pro -
+
+![image](https://github.com/user-attachments/assets/8ac60ae0-bcae-4bb3-a9f7-859a80206ed0)
+
+
+![image](https://github.com/user-attachments/assets/4a624ddc-192a-4ccb-93a4-76819b797334)
 
 
 ## Testing
