@@ -1,6 +1,6 @@
 # Roman Numeral Converter
 
-A full-stack application for converting numbers to Roman numerals, built with React and Express.js.
+A full-stack application for converting numbers to Roman numerals, built with TypeScript, React, and Express.js.
 
 ## Table of Contents
 
@@ -101,7 +101,7 @@ roman-numeral-converter/
       cd roman-numeral-converter
 ```
 
-### 3. In the backend folder, rename .env.production.example to .env.production, and in the frontend folder, rename .env.example to .env.
+### 3. In the backend folder, rename `.env.production.example` to `.env.production`, and in the frontend folder, rename `.env.example` to `.env.`
 
 ### 4. Run the project
 ```bash
@@ -188,26 +188,27 @@ GET /romannumeral?query={number}
 **Error Responses:**
 - 400 Bad Request
   - Missing query parameter
-    
-    <img src="assets/5f7925da-2e30-481d-b8e1-89cbef3c324a" style="display: inline-block;" />
-
-  
+  -   
     ![image](https://github.com/user-attachments/assets/5f7925da-2e30-481d-b8e1-89cbef3c324a)
 
-    
+
   - Invalid input (non-numeric)
     
     ![image](https://github.com/user-attachments/assets/d525c935-cc51-4d1c-8e83-13eacfebcb52)
+
 
   - Out of range number
     
     ![image](https://github.com/user-attachments/assets/31fa4c80-c50e-4885-9cff-ea5c14d01deb)
 
+
   - Decimal number
     
     ![image](https://github.com/user-attachments/assets/bddab0c1-8299-4617-a69f-58689df24731)
 
+
 - 500 InternalServerError
+
 
 ### Metrics
 ```
@@ -225,12 +226,14 @@ The initial design on Figma:
 ![image](https://github.com/user-attachments/assets/f28d99bb-b74d-420c-9295-8c106f0a9bab)
 
 The UI after development:
+
+      - The user interface design changes are implemented according to the React Spectrum guidelines and components.
       - The toggle button changes dark mode to light mode; by default, it is set to match the system's mode.
       - The Convert to Roman Numeral button is enabled when a user enters text in the text field.
 
 ![image](https://github.com/user-attachments/assets/f5f6a0d1-2896-46b3-85ec-be14d0cd03a4)
 
-The light mode of user interface:
+The light mode of the user interface:
 
 ![image](https://github.com/user-attachments/assets/09be375e-271f-4a61-853b-06c17d82105a)
 
@@ -259,7 +262,7 @@ npm test:coverage
 
 ![image](https://github.com/user-attachments/assets/5c980730-3c0f-4068-be06-181bca00cda2)
 
-The index.html file in the coverage folder
+The index.html file in the coverage folder shows the total coverage of code in the testcases
 
 ![image](https://github.com/user-attachments/assets/1b9b97c2-b702-42e0-9214-5e44f4f69965)
 
@@ -272,7 +275,7 @@ npm test
 
 ![image](https://github.com/user-attachments/assets/52b8371d-e01f-4a9d-b02d-3710fabdb736)
 
-The index.html file in the coverage folder
+The index.html file in the coverage folder shows the total coverage of code in the testcases
 
 ![image](https://github.com/user-attachments/assets/82bd5aca-a25d-4901-8a81-727e00606c5c)
 
@@ -282,15 +285,22 @@ The index.html file in the coverage folder
 The project implements the three pillars of observability:
 
 1. **Logs**:
-   - Structured logging using Winston
+   - Structured logging using Console
    - Log levels (info, error, debug)
    - Request/response logging
    - Error tracking
+     
+     For the current scope of this project, I’ve used simple console-based logging, as the code is relatively lightweight and basic logging is sufficient for development and debugging.
+
+     In the future, if more advanced and customizable logging is needed (e.g., file transport, log rotation, or log level filtering), I plan to integrate Winston — a versatile and widely-used logging library in Node.js.
+     Development: Shows detailed logs including debug, info, warn, and error levels for easier debugging and testing.
+
+     Production: Restricts logs to only essential levels — info, warn, and error — to maintain cleaner output and better performance.
   
    ![image](https://github.com/user-attachments/assets/f4145658-bce0-4f68-809b-97cf9b3d46e8)
 
 
-2. **Metrics**:
+1. **Metrics**:
    - Conversion duration tracking
    - Error rate monitoring
    - Request count metrics
@@ -298,15 +308,21 @@ The project implements the three pillars of observability:
    ![image](https://github.com/user-attachments/assets/b674e473-e8f6-4256-81d4-7c2a1783c59c)
 
 
-3. **Traces**:
+2. **Traces**:
    - Request tracing
    - Performance monitoring
    - Error correlation
+  
+     This is implemented using OpenTelemetry and the Jaeger container, port 16686 is exposed to see the insights:
   
    ![image](https://github.com/user-attachments/assets/2abe8ed4-b7e7-4368-97e6-2c3f65ca0ed4)
 
 
 ## Documentation
+
+To demonstrate automated documentation generation using JSDoc comments, I integrated the TypeDoc library into the project. This setup ensures that up-to-date, type-safe documentation is generated directly from the source code.
+
+Maintaining documentation manually can quickly become outdated and hard to scale, especially as the codebase grows. By using TypeDoc, documentation stays in sync with the code, reducing maintenance overhead and improving developer experience.
 
 1. To create a basic documentation:
       ```bash
@@ -326,6 +342,7 @@ The project implements the three pillars of observability:
       ```
       
    Generates `index.html` file in the /docs folder
+
 
 For more information about the code structure, refer [roman-numeral-conversion](./roman-numeral-conversion)
 
@@ -382,4 +399,7 @@ The UI is built with accessibility in mind:
 - High contrast support through light/dark mode
 
 ## FAQs
+
+1. Why is the `.env.example` file needed?
+   - To simulate a production-ready setup, I’ve utilized environment variables in the implementation. Although the .env file contains no sensitive information, only example files (.env.example, .env.production.example) are included in the repository, as it's best practice to avoid committing actual .env files to GitHub or any public platforms.
 
