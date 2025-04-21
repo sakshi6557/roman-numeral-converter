@@ -55,35 +55,39 @@ This project consists of two main components:
 
 ```
 roman-numeral-converter/
-├── backend/                 # Backend service
-├── backend/                 # Backend service
+│
+├── backend/                     # Backend service (Node.js + Express + TypeScript)
+|   ├── coverage/
 │   ├── src/
-│   │   ├── index.ts        # Main server file
-│   │   ├── converter.ts    # Roman numeral conversion logic
-│   │   └── logger.ts       # Logging configuration
+│   │   ├── routes/              # API route handlers
+│   │   ├── services/            # Core logic, e.g., Roman numeral conversion
+│   │   ├── app.ts               # App entry point (Express setup)
+│   │   └── traces.ts            # Tracing setup
 │   ├── package.json
-│   └── Dockerfile
-├── frontend/                # React application
-│   │   ├── index.ts        # Main server file
-│   │   ├── converter.ts    # Roman numeral conversion logic
-│   │   └── logger.ts       # Logging configuration
-│   ├── package.json
-│   └── Dockerfile
-├── frontend/                # React application
-│   ├── src/
-│   │   ├── components/     # React components
-│   │   ├── App.tsx         # Main application component
-│   │   └── main.tsx        # Application entry point
-│   ├── package.json
+│   ├── tsconfig.json
+│   ├── .env.production          # Environment variables
 │   └── Dockerfile
 │
-├── docs/
-|   ├── index.html        # Generated documentation for project
-|   └── modules.html      # Documentation
+├── frontend/                    # React frontend (Vite + TypeScript)
+|   ├── coverage/
+│   ├── public/                  # Static files
+│   ├── src/
+│   │   ├── components/          # Reusable React components
+│   │   ├── App.tsx              # Main app component
+│   │   └── main.tsx             # App entry point (Vite)
+│   ├── package.json
+│   ├── tsconfig.json
+│   ├── vite.config.ts
+│   ├── .env                     # Frontend environment variables
+│   └── Dockerfile
+│
+├── docs/                        # Project documentation
+│   ├── index.html
+│   └── modules.html
 |
-├── docker-compose.yml       # Container orchestration
+│── docker-compose.yml           # Orchestrates frontend + backend containers
 |
-└── README.md            # This file
+└── README.md
 ```
 
 
@@ -97,7 +101,7 @@ roman-numeral-converter/
       cd roman-numeral-converter
 ```
 
-### 3. Create a .env.production file in the backend folder and .env file in the frontend folder
+### 3. In the backend folder, rename .env.production.example to .env.production, and in the frontend folder, rename .env.example to .env.
 
 ### 4. Run the project
 ```bash
@@ -121,39 +125,31 @@ cd roman-numeral-converter
 ```
 
 ### Backend Setup
-1. Navigate to the backend directory:
+1. Navigate to the backend directory and install dependencies:
    ```bash
    cd backend
-   ```
-   
-2. Install dependencies:
-   ```bash
    npm install
    ```
    
-3. Start the server:
+2. Start the server:
    ```bash
    npm run dev
    ```
    
-   The API will be available at `http://localhost:8080`
+   The Roman converter services will be available at `http://localhost:8080`
 
 ### Frontend Setup
-1. Navigate to the frontend directory:
+1. Navigate to the frontend directory and install dependencies:
    ```bash
    cd frontend
-   ```
-
-2. Install dependencies:
-   ```bash
    npm install
    ```
 
-3. Start the server:
+2. Start the server:
    ```bash
    npm run dev
    ```
-   The frontend will be available at `http://localhost:8081`
+   The user interface will be available at `http://localhost:8081`
 
 ## API Documentation
 
@@ -228,13 +224,28 @@ Returns Prometheus metrics including request count, duration, and error rates.
 ```bash
 cd backend
 npm test
+npm test:coverage
 ```
+
+![image](https://github.com/user-attachments/assets/5c980730-3c0f-4068-be06-181bca00cda2)
+
+The index.html file in the coverage folder
+
+![image](https://github.com/user-attachments/assets/1b9b97c2-b702-42e0-9214-5e44f4f69965)
+
 
 ### Frontend Tests
 ```bash
 cd frontend
 npm test
 ```
+
+![image](https://github.com/user-attachments/assets/52b8371d-e01f-4a9d-b02d-3710fabdb736)
+
+The index.html file in the coverage folder
+
+![image](https://github.com/user-attachments/assets/82bd5aca-a25d-4901-8a81-727e00606c5c)
+
 
 ## Observability Features
 
@@ -245,16 +256,25 @@ The project implements the three pillars of observability:
    - Log levels (info, error, debug)
    - Request/response logging
    - Error tracking
+  
+   ![image](https://github.com/user-attachments/assets/f4145658-bce0-4f68-809b-97cf9b3d46e8)
+
 
 2. **Metrics**:
    - Conversion duration tracking
    - Error rate monitoring
    - Request count metrics
 
+   ![image](https://github.com/user-attachments/assets/b674e473-e8f6-4256-81d4-7c2a1783c59c)
+
+
 3. **Traces**:
    - Request tracing
    - Performance monitoring
    - Error correlation
+  
+   ![image](https://github.com/user-attachments/assets/2abe8ed4-b7e7-4368-97e6-2c3f65ca0ed4)
+
 
 ## Documentation
 
@@ -274,6 +294,7 @@ The project implements the three pillars of observability:
       npm run docs:clean
       npm run docs:build
       ```
+      
    Generates `index.html` file in the /docs folder
 
 For more information about the code structure, refer [roman-numeral-conversion](./roman-numeral-conversion)
