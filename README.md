@@ -52,26 +52,26 @@ This project consists of two main components:
 
 ```
 roman-numeral-converter/
-├── backend/              # Express.js backend API
+├── backend/                 # Backend service
 │   ├── src/
-│   │   ├── routes/       # API route handlers
-│   │   ├── services/     # Business logic
-│   │   └── app.ts       # Express application setup
-│   └── package.json     # Backend dependencies
-│
-├── frontend/              # React frontend application
+│   │   ├── index.ts        # Main server file
+│   │   ├── converter.ts    # Roman numeral conversion logic
+│   │   └── logger.ts       # Logging configuration
+│   ├── package.json
+│   └── Dockerfile
+├── frontend/                # React application
 │   ├── src/
-│   │   ├── components/    # React components
-│   │   ├── App.tsx       # Main application component
-│   │   └── main.tsx      # Application entry point
-│   ├── index.html        # HTML template
-│   └── package.json      # Frontend dependencies
+│   │   ├── components/     # React components
+│   │   ├── App.tsx         # Main application component
+│   │   └── main.tsx        # Application entry point
+│   ├── package.json
+│   └── Dockerfile
 │
 ├── docs/
 |   ├── index.html        # Generated documentation for project
 |   └── modules.html      # Documentation
 |
-├── typedoc.json
+├── docker-compose.yml       # Container orchestration
 |
 └── README.md            # This file
 ```
@@ -152,6 +152,8 @@ cd roman-numeral-converter
 /
 ```
 Returns information about the endpoints
+![image](https://github.com/user-attachments/assets/e6d58282-6696-4f81-8ee4-5285ab6641f4)
+
 
 ### Convert Number to Roman Numeral
 ```
@@ -172,13 +174,24 @@ GET /romannumeral?query={number}
 "duration": "1ms"
 }
 ```
+![image](https://github.com/user-attachments/assets/797dcc60-e235-4802-a304-beea483e622d)
+
 
 **Error Responses:**
 - 400 Bad Request
   - Missing query parameter
+    ![image](https://github.com/user-attachments/assets/5f7925da-2e30-481d-b8e1-89cbef3c324a)
+
+    
   - Invalid input (non-numeric)
+    ![image](https://github.com/user-attachments/assets/d525c935-cc51-4d1c-8e83-13eacfebcb52)
+
   - Out of range number
+    ![image](https://github.com/user-attachments/assets/31fa4c80-c50e-4885-9cff-ea5c14d01deb)
+
   - Decimal number
+    ![image](https://github.com/user-attachments/assets/bddab0c1-8299-4617-a69f-58689df24731)
+
 - 500 InternalServerError
 
 ### Metrics
@@ -186,6 +199,8 @@ GET /romannumeral?query={number}
 GET /metrics
 ```
 Returns Prometheus metrics including request count, duration, and error rates.
+![image](https://github.com/user-attachments/assets/b674e473-e8f6-4256-81d4-7c2a1783c59c)
+
 
 ## Development mode
 
