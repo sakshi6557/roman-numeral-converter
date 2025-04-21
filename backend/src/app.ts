@@ -10,7 +10,7 @@ import './traces';
 import express from 'express';
 import cors from 'cors';
 import { romanNumeralHandler } from './routes/romanNumeral';
-import { requestCount, httpRequestDurationMicroseconds, register } from './services/metrics';
+import {register } from './services/metrics';
 import dotenv from 'dotenv';
 
 // Load environment variables based on NODE_ENV

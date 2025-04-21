@@ -56,7 +56,14 @@ This project consists of two main components:
 ```
 roman-numeral-converter/
 ├── backend/                 # Backend service
+├── backend/                 # Backend service
 │   ├── src/
+│   │   ├── index.ts        # Main server file
+│   │   ├── converter.ts    # Roman numeral conversion logic
+│   │   └── logger.ts       # Logging configuration
+│   ├── package.json
+│   └── Dockerfile
+├── frontend/                # React application
 │   │   ├── index.ts        # Main server file
 │   │   ├── converter.ts    # Roman numeral conversion logic
 │   │   └── logger.ts       # Logging configuration

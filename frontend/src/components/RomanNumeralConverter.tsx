@@ -10,10 +10,13 @@ import {
   Content,
   Header,
 } from '@adobe/react-spectrum';
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 
 /**
- * Interface for the RomanNumeralConverter component props
+ * Props interface for the RomanNumeralConverter component
+ * @interface RomanNumeralConverterProps
+ * @property {boolean} isDark - Current theme state (dark/light)
+ * @property {(isDark: boolean) => void} onThemeChange - Callback function to toggle theme
  */
 interface RomanNumeralConverterProps {
   isDark: boolean;
@@ -21,7 +24,34 @@ interface RomanNumeralConverterProps {
 }
 
 /**
- * Interface for error responses from the API
+ * Interface for successful API response
+ * @interface SuccessResponse
+ * @property {string} input - Input number
+ * @property {string} output - Roman numeral result
+ * @property {number} statusCode - HTTP status code
+ * @property {string} statusText - HTTP status text
+ * @property {string} requestId - Unique request identifier
+ * @property {string} duration - Request duration in milliseconds
+ */
+interface SuccessResponse {
+  input: string;
+  output: string;
+  statusCode: number;
+  statusText: string;
+  requestId: string;
+  duration: string;
+}
+
+/**
+ * Interface for error API response
+ * @interface ErrorResponse
+ * @property {string} error - Error type identifier
+ * @property {string} message - Human-readable error message
+ * @property {number} statusCode - HTTP status code
+ * @property {string} statusText - HTTP status text
+ * @property {string} requestId - Unique request identifier
+ * @property {string} [duration] - Request duration in milliseconds
+ * @property {string} [input] - Input value that caused the error
  */
 interface ErrorResponse {
   error: string;
@@ -29,49 +59,116 @@ interface ErrorResponse {
   statusCode: number;
   statusText: string;
   requestId: string;
+  duration?: string;
+  input?: string;
 }
+
+/**
+ * Validates if the input string represents a valid number between 1 and 3999
+ * @param {string} value - The input string to validate
+ * @returns {boolean} True if the input is valid, false otherwise
+ * 
+ * @example
+ * // returns true
+ * isValidInput('42');
+ * 
+ * @example
+ * // returns false
+ * isValidInput('4000');
+ * 
+ * @example
+ * // returns false
+ * isValidInput('invalid');
+ */
+const isValidInput = (value: string): boolean => {
+  const num = parseInt(value);
+  return !isNaN(num) && num >= 1 && num <= 3999;
+};
 
 /**
  * RomanNumeralConverter Component
  * 
- * A React component that converts numbers to Roman numerals using Adobe React Spectrum components.
+ * A React component that converts numbers to Roman numerals using Adobe's React Spectrum components.
  * Features:
  * - Light/dark mode support
  * - Input validation
  * - Error handling
  * - Performance metrics
+ * - Accessibility support
  * 
+ * @component
  * @param {RomanNumeralConverterProps} props - Component props
  * @returns {JSX.Element} The rendered component
+ * 
+ * @example
+ * <RomanNumeralConverter
+ *   isDark={false}
+ *   onThemeChange={(isDark) => console.log(`Theme changed to ${isDark ? 'dark' : 'light'}`)}
+ * />
  */
-export function RomanNumeralConverter({ isDark, onThemeChange }: RomanNumeralConverterProps) {
+export function RomanNumeralConverter({ isDark, onThemeChange }: RomanNumeralConverterProps): JSX.Element {
+  // State management
   const [input, setInput] = useState<string>('');
   const [output, setOutput] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
 
-  // Log component mount and theme changes
-  useEffect(() => {
+  /**
+   * Effect hook to log component lifecycle events
+   * Logs when the component mounts and unmounts, including the current theme
+   * 
+   * @effect
+   * @param {boolean} isDark - Current theme state
+   * @returns {() => void} Cleanup function
+   */
+  useEffect((): (() => void) => {
     console.log(`[RomanNumeralConverter] Component mounted in ${isDark ? 'dark' : 'light'} mode`);
-    return () => {
+    return (): void => {
       console.log('[RomanNumeralConverter] Component unmounted');
     };
   }, [isDark]);
 
   /**
    * Handles the conversion of a number to Roman numeral
-   * Logs performance metrics and errors
+   * - Validates input
+   * - Makes API request
+   * - Handles errors
+   * - Logs performance metrics
+   * 
+   * @async
+   * @function handleConvert
+   * @returns {Promise<void>}
+   * 
+   * @throws {Error} If the API request fails
    */
-  const handleConvert = async () => {
+  const handleConvert = async (): Promise<void> => {
+    // Clear previous state
+    setError(null);
+    setOutput(null);
+
+    // Validate input
+    if (!isValidInput(input)) {
+      const errorMessage = 'Invalid input. Please enter a number between 1 and 3999';
+      setError(errorMessage);
+      console.error('[RomanNumeralConverter] Input validation failed', {
+        input,
+        timestamp: new Date().toISOString()
+      });
+      return;
+    }
+
     const startTime = performance.now();
     try {
+      // Log conversion attempt
       console.log(`[RomanNumeralConverter] Converting number: ${input}`);
-      const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:8080';
-      const response = await axios.get(`${apiUrl}/romannumeral?query=${input}`);
       
+      // Make API request
+      const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:8080';
+      const response = await axios.get<SuccessResponse>(`${apiUrl}/romannumeral?query=${input}`);
+      
+      // Calculate and log performance metrics
       const endTime = performance.now();
       const conversionDuration = endTime - startTime;
       
-      // Enhanced logging with metrics
       console.log(`[RomanNumeralConverter] Conversion successful: ${input} -> ${response.data.output}`, {
         duration: `${conversionDuration.toFixed(2)}ms`,
         timestamp: new Date().toISOString(),
@@ -80,20 +177,17 @@ export function RomanNumeralConverter({ isDark, onThemeChange }: RomanNumeralCon
       });
       
       setOutput(response.data.output);
-      setError(null);
-    } catch (err: any) {
-      const errorResponse = err.response?.data as ErrorResponse;
-      const errorMessage = errorResponse?.message || 'An unexpected error occurred';
+    } catch (err: unknown) {
+      // Handle and log errors
+      const axiosError = err as AxiosError<ErrorResponse>;
+      const errorMessage = axiosError.response?.data?.message || 'An unexpected error occurred';
+      setError(errorMessage);
       
       console.error(`[RomanNumeralConverter] Conversion error: ${errorMessage}`, {
         input,
-        statusCode: err.response?.status,
-        requestId: errorResponse?.requestId,
+        statusCode: axiosError.response?.status,
         timestamp: new Date().toISOString()
       });
-      
-      setError(errorMessage);
-      setOutput(null);
     }
   };
 
@@ -112,6 +206,7 @@ export function RomanNumeralConverter({ isDark, onThemeChange }: RomanNumeralCon
         height="100%"
         width="100%"
       >
+        {/* Header with theme toggle */}
         <Header>
           <Flex 
             direction="row" 
@@ -135,6 +230,8 @@ export function RomanNumeralConverter({ isDark, onThemeChange }: RomanNumeralCon
             </Flex>
           </Flex>
         </Header>
+
+        {/* Main content */}
         <Content>
           <Flex 
             direction="column" 
@@ -144,6 +241,8 @@ export function RomanNumeralConverter({ isDark, onThemeChange }: RomanNumeralCon
             gap="size-400"
           >
             <Heading level={1} alignSelf="center">Roman Numeral Converter</Heading>
+            
+            {/* Input field */}
             <TextField
               label="Enter a number (1–3999)"
               value={input}
@@ -153,6 +252,8 @@ export function RomanNumeralConverter({ isDark, onThemeChange }: RomanNumeralCon
               errorMessage={error}
               aria-label="Number input"
             />
+            
+            {/* Convert button */}
             <Button 
               variant="cta" 
               onPress={handleConvert}
@@ -161,6 +262,8 @@ export function RomanNumeralConverter({ isDark, onThemeChange }: RomanNumeralCon
             >
               Convert to roman numeral
             </Button>
+            
+            {/* Output display */}
             {output && (
               <View 
                 padding="size-200"

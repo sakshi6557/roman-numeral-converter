@@ -1,6 +1,5 @@
 import '@testing-library/jest-dom';
-import { expect, afterEach, vi } from 'vitest';
-import { cleanup } from '@testing-library/react';
+import { expect, vi } from 'vitest';
 import * as matchers from '@testing-library/jest-dom/matchers';
 
 // Mock CSS imports
@@ -17,7 +16,6 @@ vi.mock('*.css', () => ({}));
 // Extend Vitest's expect method with methods from react-testing-library
 expect.extend(matchers);
 
-// Cleanup after each test
-afterEach(() => {
-  cleanup();
-}); 
+// Mock console methods
+vi.spyOn(console, 'log').mockImplementation(() => {});
+vi.spyOn(console, 'error').mockImplementation(() => {}); 

@@ -1,11 +1,7 @@
 import '@testing-library/jest-dom';
-import { expect, afterEach } from 'vitest';
-import { cleanup } from '@testing-library/react';
+import { expect} from 'vitest';
+import { vi } from 'vitest';
 
-// Automatically cleanup after each test
-afterEach(() => {
-  cleanup();
-});
 
 // Extend expect with custom matchers
 expect.extend({
@@ -16,4 +12,8 @@ expect.extend({
       message: () => `expected ${received} to be in the document`,
     };
   },
-}); 
+});
+
+// Mock console methods
+vi.spyOn(console, 'log').mockImplementation(() => {});
+vi.spyOn(console, 'error').mockImplementation(() => {}); 

@@ -12,11 +12,11 @@ const isProduction = process.env.NODE_ENV === 'production';
 const logLevel = process.env.LOG_LEVEL || (isDevelopment ? 'debug' : 'info');
 
 // Get current timestamp
-const getTimestamp = () => new Date().toISOString();
+const getTimestamp = (): string => new Date().toISOString();
 
 // Create logger object
 const logger = {
-  error: (message: string, ...args: any[]) => {
+  error: (message: string, ...args: unknown[]): void => {
     const logMessage = isProduction
       ? JSON.stringify({
           timestamp: getTimestamp(),
@@ -29,7 +29,7 @@ const logger = {
     console.error(logMessage);
   },
 
-  warn: (message: string, ...args: any[]) => {
+  warn: (message: string, ...args: unknown[]): void => {
     if (['error', 'warn', 'info', 'debug'].includes(logLevel)) {
       const logMessage = isProduction
         ? JSON.stringify({
@@ -44,7 +44,7 @@ const logger = {
     }
   },
 
-  info: (message: string, ...args: any[]) => {
+  info: (message: string, ...args: unknown[]): void => {
     if (['info', 'debug'].includes(logLevel)) {
       const logMessage = isProduction
         ? JSON.stringify({
@@ -59,7 +59,7 @@ const logger = {
     }
   },
 
-  debug: (message: string, ...args: any[]) => {
+  debug: (message: string, ...args: unknown[]): void => {
     if (logLevel === 'debug') {
       console.debug(`[${getTimestamp()}] DEBUG: ${message} ${args.length > 0 ? JSON.stringify(args) : ''}`);
     }
