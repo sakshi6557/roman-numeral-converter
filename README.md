@@ -6,9 +6,8 @@ A full-stack application for converting numbers to Roman numerals, built with Ty
 
 - [Overview](#overview)
 - [Features](#features)
-- [Prerequisites](#Prerequisites)
 - [Project-Structure](#Project-Structure)
-- [Getting-Started](#Getting-Started)
+- [Quick-Start](#Quick-Start)
 - [Production-Deployment](#Production-Deployment)
 - [Development-Setup](#Development-Setup)
 - [API-Documentation](#API-Documentation)
@@ -29,6 +28,7 @@ This project consists of two main components:
 - Backend: A RESTful API built with Express.js and TypeScript
 - Frontend: A modern React application with React Spectrum UI
 
+
 ## Features
 
 ### Backend
@@ -47,12 +47,6 @@ This project consists of two main components:
 - Error handling and input validation
 - Clean and modern UI using React Spectrum
 
-
-## Prerequisites
-
-- Node.js (v18 or higher)
-- Git
-- Docker (optional)
 
 ## Project Structure
 
@@ -94,74 +88,101 @@ roman-numeral-converter/
 ```
 
 
-## Getting Started
+## Quick Start
 
-### 1. Make sure Docker & Docker Compose are installed
+You can run this project without cloning the repository by simply using Docker images.
 
-### 2. Pull all the necessary docker container images
+### Prerequisites:
+   - Docker installed on your machine
+
+### 1. Pull Docker images - Jaeger, Backend, Frontend
+
 ```bash
    docker pull jaegertracing/all-in-one:1.48
+```
+```bash
    docker pull sakshi6557/roman-numeral-service:latest
+```
+```bash
    docker pull sakshi6557/roman-numeral-frontend:latest
 ```
-### 3. Create a network for application
+### 2. Create Docker Network
 ```bash
    docker network create roman-network
 ```
-### 4. Run the containers in the same order
+### 3. Run containers in the same order
+Start Jaeger container:
 ```bash
    docker run -d --name jaeger --network roman-network -p 16686:16686 -p 4318:4318  jaegertracing/all-in-one:1.48
 ```
-
+Start Backend container:
 ```bash
    docker run -d --name backend -p 8080:8080 -e OTEL_EXPORTER_OTLP_ENDPOINT=http://jaeger:4318 --network roman-network sakshi6557/roman-numeral-service:latest
 ```
-
+Start Frontend container:
 ```bash
    docker run -d --name frontend --network roman-network -p 8081:80 -e VITE_API_URL=http://backend:8080 sakshi6557/roman-numeral-frontend:latest
 ```
 
-### 5. Access the app in your browser
-  
-   The frontend will be available at `http://localhost:8081` and the backend API will be available at `http://localhost:8080`
+### 4. Access the app in your browser
+
+   - Frontend: `http://localhost:8081`
+   - Backend: `http://localhost:8080`
+   - Jaeger(Tracing): `http://localhost:16686`
 
 
-## Production Deployment
+### 5. To stop the docker containers
+```bash
+   docker stop jaeger
+   docker stop frontend
+   docker stop backend 
+```
 
-### 1. Make sure Docker & Docker Compose are installed
+## Production Deployment (with source code)
 
-### 2. Clone the Repository
+### Prerequisites:
+   - Docker & Docker Compose installed
+
+### 1. Clone the Repository
 ```bash
    git clone https://github.com/sakshi6557/roman-numeral-converter.git
    cd roman-numeral-converter
 ```
    You can also choose to [download the ZIP](#https://github.com/sakshi6557/roman-numeral-converter/archive/refs/heads/main.zip) if you prefer not to use Git.
    
-### 3. In the backend folder, rename `.env.production.example` to `.env.production`, and in the frontend folder, rename `.env.example` to `.env.`
+### 2. Configure Environments
 
-### 4. Run the project
+   Rename the env files:
+   - Backend: `.env.production.example` -> `.env.production`
+   - Frontend: `.env.example` -> `.env.`
+
+### 3. Run with Docker Compose
 ```bash
       docker-compose up --build
 ```
-### 5. Access the app in your browser
-  
-   The backend API will be available at `http://localhost:8080`, the frontend will be available at `http://localhost:8081`, and the Jaeger UI at http://localhost:16686
 
-### 6. To stop the containers
+### 4. Access the app in your browser
+
+   - Frontend: `http://localhost:8081`
+   - Backend: `http://localhost:8080`
+   - Jaeger(Tracing): `http://localhost:16686`
+
+
+### 5. To stop the services
 ```bash
       docker-compose down
 ```
 
 ## Development Setup
 
-### Clone the Repository or Download the code
+### 1. Clone the Repository or Download the code
 ```bash
    git clone https://github.com/sakshi6557/roman-numeral-converter.git
    cd roman-numeral-converter
 ```
 You can also choose to [download the ZIP](#https://github.com/sakshi6557/roman-numeral-converter/archive/refs/heads/main.zip) if you prefer not to use Git.
 
-### Backend Setup
+### 2. Backend Setup
 1. Navigate to the backend directory and install dependencies:
 ```bash
    cd backend
@@ -175,7 +196,7 @@ You can also choose to [download the ZIP](#https://github.com/sakshi6557/roman-n
    
    The Roman converter services will be available at `http://localhost:8080`
 
-### Frontend Setup
+### 3. Frontend Setup
 1. Navigate to the frontend directory and install dependencies:
 ```bash
    cd frontend
@@ -542,6 +563,7 @@ The UI is built with accessibility in mind:
 
 1. Why is the `.env.example` file needed?
    - To simulate a production-ready setup, I've utilized environment variables in the implementation. Although the .env file contains no sensitive information, only example files (.env.example, .env.production.example) are included in the repository, as it's best practice to avoid committing actual .env files to GitHub or any public platforms.
+
 
 
 
