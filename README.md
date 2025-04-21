@@ -12,8 +12,11 @@ A full-stack application for converting numbers to Roman numerals, built with Re
 - [API-Documentation](#API-Documentation)
 - [Development-mode](#Development-mode)
 - [Testing](#Testing)
+- [Observability-Features](#Observability-Features)
 - [Documentation](#Documentation)
 - [Technologies-Used](#Technologies-Used)
+- [Dependency-Selection-Reasoning](#Dependency-Selection-Reasoning)
+- [Accessibility](#Accessibility)
 - [FAQs](#FAQs)
 
 
@@ -44,9 +47,9 @@ This project consists of two main components:
 
 ## Prerequisites
 
-- Node.js (v14 or higher)
-- npm (v6 or higher)
-- Docker (optional, for containerized deployment)
+- Node.js (v18 or higher)
+- Git
+- Docker (optional)
 
 ## Project Structure
 
@@ -77,7 +80,7 @@ roman-numeral-converter/
 ```
 
 
-## Getting Started - (With Docker)
+## Getting Started - (Production Deployment)
 
 ### 1. Make sure Docker & Docker Compose are installed
 
@@ -97,12 +100,12 @@ roman-numeral-converter/
   
    The frontend will be available at `http://localhost:8081` and the backend API will be available at `http://localhost:8080`
 
-### 6. To stop the container
+### 6. To stop the containers
 ```bash
       docker-compose down
 ```
 
-## Getting Started - (Without Docker)
+## Getting Started - (Development Setup)
 
 ### Clone the Repository
 ```bash
@@ -121,9 +124,9 @@ cd roman-numeral-converter
    npm install
    ```
    
-3. Start the production server:
+3. Start the server:
    ```bash
-   npm run start
+   npm run dev
    ```
    
    The API will be available at `http://localhost:8080`
@@ -139,7 +142,7 @@ cd roman-numeral-converter
    npm install
    ```
 
-3. Start the development server:
+3. Start the server:
    ```bash
    npm run dev
    ```
@@ -152,6 +155,7 @@ cd roman-numeral-converter
 /
 ```
 Returns information about the endpoints
+
 ![image](https://github.com/user-attachments/assets/e6d58282-6696-4f81-8ee4-5285ab6641f4)
 
 
@@ -174,22 +178,30 @@ GET /romannumeral?query={number}
 "duration": "1ms"
 }
 ```
+
 ![image](https://github.com/user-attachments/assets/797dcc60-e235-4802-a304-beea483e622d)
 
 
 **Error Responses:**
 - 400 Bad Request
   - Missing query parameter
+    
+    <img src="assets/5f7925da-2e30-481d-b8e1-89cbef3c324a" style="display: inline-block;" />
+
+  
     ![image](https://github.com/user-attachments/assets/5f7925da-2e30-481d-b8e1-89cbef3c324a)
 
     
   - Invalid input (non-numeric)
+    
     ![image](https://github.com/user-attachments/assets/d525c935-cc51-4d1c-8e83-13eacfebcb52)
 
   - Out of range number
+    
     ![image](https://github.com/user-attachments/assets/31fa4c80-c50e-4885-9cff-ea5c14d01deb)
 
   - Decimal number
+    
     ![image](https://github.com/user-attachments/assets/bddab0c1-8299-4617-a69f-58689df24731)
 
 - 500 InternalServerError
@@ -199,22 +211,9 @@ GET /romannumeral?query={number}
 GET /metrics
 ```
 Returns Prometheus metrics including request count, duration, and error rates.
+
 ![image](https://github.com/user-attachments/assets/b674e473-e8f6-4256-81d4-7c2a1783c59c)
 
-
-## Development mode
-
-### Backend Development
-```bash
-cd backend
-npm run dev
-```
-
-### Frontend Development
-```bash
-cd frontend
-npm run dev
-```
 
 ## Testing
 
@@ -230,7 +229,28 @@ cd frontend
 npm test
 ```
 
-### Documentation
+## Observability Features
+
+The project implements the three pillars of observability:
+
+1. **Logs**:
+   - Structured logging using Winston
+   - Log levels (info, error, debug)
+   - Request/response logging
+   - Error tracking
+
+2. **Metrics**:
+   - Conversion duration tracking
+   - Error rate monitoring
+   - Request count metrics
+
+3. **Traces**:
+   - Request tracing
+   - Performance monitoring
+   - Error correlation
+
+## Documentation
+
 1. To create a basic documentation:
       ```bash
       cd backend
@@ -268,5 +288,40 @@ For more information about the code structure, refer [roman-numeral-conversion](
 - [React Spectrum](https://react-spectrum.adobe.com/) - UI components
 - [Vite](https://vitejs.dev/) - Build tool and development server
 
-### FAQs
+## Dependency Selection Reasoning
+
+1. **Express.js**:
+   - Lightweight and fast
+   - Excellent TypeScript support
+   - Large ecosystem of middleware
+   - Easy to containerize
+
+2. **Adobe React Spectrum**:
+   - Built-in accessibility features
+   - Comprehensive component library
+   - Built-in theming support
+   - Professional design system
+   - Active maintenance and support
+
+3. **Winston**:
+   - Structured logging capabilities
+   - Multiple transport options
+   - Easy integration with monitoring tools
+   - Production-ready features
+
+4. **Vite**:
+   - Fast development server
+   - Optimized production builds
+   - Excellent TypeScript support
+   - Modern build tooling
+
+## Accessibility
+
+The UI is built with accessibility in mind:
+- ARIA labels for all interactive elements
+- Keyboard navigation support
+- Screen reader compatibility
+- High contrast support through light/dark mode
+
+## FAQs
 
