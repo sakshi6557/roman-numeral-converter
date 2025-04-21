@@ -145,7 +145,7 @@ roman-numeral-converter/
 ```
 ### 5. Access the app in your browser
   
-   The frontend will be available at `http://localhost:8081` and the backend API will be available at `http://localhost:8080`
+   The backend API will be available at `http://localhost:8080`, the frontend will be available at `http://localhost:8081`, and the Jaeger UI at http://localhost:16686
 
 ### 6. To stop the containers
 ```bash
