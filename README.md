@@ -25,8 +25,9 @@ A full-stack application for converting numbers to Roman numerals, built with Ty
 ## Overview
 
 This project consists of two main components:
-- Frontend: A modern React application with React Spectrum UI
+
 - Backend: A RESTful API built with Express.js and TypeScript
+- Frontend: A modern React application with React Spectrum UI
 
 ## Features
 
