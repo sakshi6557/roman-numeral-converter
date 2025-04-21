@@ -9,14 +9,16 @@ A full-stack application for converting numbers to Roman numerals, built with Ty
 - [Prerequisites](#Prerequisites)
 - [Project-Structure](#Project-Structure)
 - [Getting-Started](#Getting-Started)
+- [Production-Deployment](#Production-Deployment)
+- [Development-Setup](#Development-Setup)
 - [API-Documentation](#API-Documentation)
 - [User-Interface](#User-Interface)
 - [Testing](#Testing)
 - [Observability-Features](#Observability-Features)
 - [Documentation](#Documentation)
-- [Technologies-Used](#Technologies-Used)
-- [Dependency-Selection-Reasoning](#Dependency-Selection-Reasoning)
+- [Tech-Stack-Insights](#Tech-Stack-Insights)
 - [Accessibility](#Accessibility)
+- [References](#References)
 - [FAQs](#FAQs)
 
 
@@ -91,16 +93,49 @@ roman-numeral-converter/
 ```
 
 
-## Getting Started - (Production Deployment)
+## Getting Started
+
+### 1. Make sure Docker & Docker Compose are installed
+
+### 2. Pull all the necessary docker container images
+```bash
+   docker pull jaegertracing/all-in-one:1.48
+   docker pull sakshi6557/roman-numeral-service:latest
+   docker pull sakshi6557/roman-numeral-frontend:latest
+```
+### 3. Create a network for application
+```bash
+   docker network create roman-network
+```
+### 4. Run the containers in the same order
+```bash
+   docker run -d --name jaeger --network roman-network -p 16686:16686 -p 4318:4318  jaegertracing/all-in-one:1.48
+```
+
+```bash
+   docker run -d --name backend -p 8080:8080 -e OTEL_EXPORTER_OTLP_ENDPOINT=http://jaeger:4318 --network roman-network sakshi6557/roman-numeral-service:latest
+```
+
+```bash
+   docker run -d --name frontend --network roman-network -p 8081:80 -e VITE_API_URL=http://backend:8080 sakshi6557/roman-numeral-frontend:latest
+```
+
+### 5. Access the app in your browser
+  
+   The frontend will be available at `http://localhost:8081` and the backend API will be available at `http://localhost:8080`
+
+
+## Production Deployment
 
 ### 1. Make sure Docker & Docker Compose are installed
 
 ### 2. Clone the Repository
 ```bash
-      git clone https://github.com/sakshi6557/roman-numeral-converter.git
-      cd roman-numeral-converter
+   git clone https://github.com/sakshi6557/roman-numeral-converter.git
+   cd roman-numeral-converter
 ```
-
+   You can also choose to [download the ZIP](#https://github.com/sakshi6557/roman-numeral-converter/archive/refs/heads/main.zip) if you prefer not to use Git.
+   
 ### 3. In the backend folder, rename `.env.production.example` to `.env.production`, and in the frontend folder, rename `.env.example` to `.env.`
 
 ### 4. Run the project
@@ -116,46 +151,47 @@ roman-numeral-converter/
       docker-compose down
 ```
 
-## Getting Started - (Development Setup)
+## Development Setup
 
-### Clone the Repository
+### Clone the Repository or Download the code
 ```bash
-git clone https://github.com/sakshi6557/roman-numeral-converter.git
-cd roman-numeral-converter
+   git clone https://github.com/sakshi6557/roman-numeral-converter.git
+   cd roman-numeral-converter
 ```
+You can also choose to [download the ZIP](#https://github.com/sakshi6557/roman-numeral-converter/archive/refs/heads/main.zip) if you prefer not to use Git.
 
 ### Backend Setup
 1. Navigate to the backend directory and install dependencies:
-   ```bash
+```bash
    cd backend
    npm install
-   ```
+```
    
 2. Start the server:
-   ```bash
+```bash
    npm run dev
-   ```
+```
    
    The Roman converter services will be available at `http://localhost:8080`
 
 ### Frontend Setup
 1. Navigate to the frontend directory and install dependencies:
-   ```bash
+```bash
    cd frontend
    npm install
-   ```
+```
 
 2. Start the server:
-   ```bash
+```bash
    npm run dev
-   ```
+```
    The user interface will be available at `http://localhost:8081`
 
 ## API Documentation
 
 ### API Information
-```
-/
+```bash
+   /
 ```
 Returns information about the endpoints
 
@@ -163,8 +199,8 @@ Returns information about the endpoints
 
 
 ### Convert Number to Roman Numeral
-```
-GET /romannumeral?query={number}
+```bash
+   GET /romannumeral?query={number}
 ```
 
 **Parameters:**
@@ -211,8 +247,8 @@ GET /romannumeral?query={number}
 
 
 ### Metrics
-```
-GET /metrics
+```bash
+   GET /metrics
 ```
 Returns Prometheus metrics including request count, duration, and error rates.
 
@@ -227,37 +263,49 @@ The initial design on Figma:
 
 The UI after development:
 
-      - The user interface design changes are implemented according to the React Spectrum guidelines and components.
-      - The toggle button changes dark mode to light mode; by default, it is set to match the system's mode.
-      - The Convert to Roman Numeral button is enabled when a user enters text in the text field.
+   - The user interface design changes are implemented according to the React Spectrum guidelines and components.
+   - The toggle button changes dark mode to light mode; by default, it is set to match the system's mode.
+   - The Convert to Roman Numeral button is enabled when a user enters text in the text field.
 
 ![image](https://github.com/user-attachments/assets/f5f6a0d1-2896-46b3-85ec-be14d0cd03a4)
 
-The light mode of the user interface:
-
 ![image](https://github.com/user-attachments/assets/09be375e-271f-4a61-853b-06c17d82105a)
-
-
-The toggle button for changing the mode of the user interface:
-
 
 ![image](https://github.com/user-attachments/assets/c26320a8-210f-4ead-89d5-e78891d62470)
 
-User Interface on Iphone 12 Pro -
+The light mode of the user interface:
+
+   - Toggle the mode button for changing the mode of the user interface.
 
 ![image](https://github.com/user-attachments/assets/8ac60ae0-bcae-4bb3-a9f7-859a80206ed0)
 
+User Interface on Iphone 12 Pro -
 
 ![image](https://github.com/user-attachments/assets/4a624ddc-192a-4ccb-93a4-76819b797334)
 
 
 ## Testing
 
+This application uses both Jest and Vitest testing frameworks to ensure reliability and maintainability.
+
+Jest is used for unit and integration tests, offering powerful mocking capabilities and wide community support.
+
+Vitest is a faster, Vite-native testing framework used for components and modern ES module-based code. It's lightweight and optimized for Vite-based projects.
+
+Both frameworks help validate core functionality, catch regressions early, and support Test-Driven Development (TDD) practices. Tests cover:
+
+   - Utility functions
+   - API calls
+   - Component behavior
+   - Edge case handling
+
+Additionally, test coverage is measured to ensure that critical parts of the code are well-tested. The coverage reports highlight areas that may need further testing, ensuring higher code quality and minimizing potential bugs in production.
+
 ### Backend Tests
 ```bash
-cd backend
-npm test
-npm test:coverage
+   cd backend
+   npm test
+   npm test:coverage
 ```
 
 ![image](https://github.com/user-attachments/assets/5c980730-3c0f-4068-be06-181bca00cda2)
@@ -269,8 +317,9 @@ The index.html file in the coverage folder shows the total coverage of code in t
 
 ### Frontend Tests
 ```bash
-cd frontend
-npm test
+   cd frontend
+   npm test
+   npm test:coverage
 ```
 
 ![image](https://github.com/user-attachments/assets/52b8371d-e01f-4a9d-b02d-3710fabdb736)
@@ -290,12 +339,13 @@ The project implements the three pillars of observability:
    - Request/response logging
    - Error tracking
      
-     For the current scope of this project, I’ve used simple console-based logging, as the code is relatively lightweight and basic logging is sufficient for development and debugging.
+   For the current scope of this project, I've used simple console-based logging, as the code is relatively lightweight and basic logging is sufficient for development and debugging.
 
-     In the future, if more advanced and customizable logging is needed (e.g., file transport, log rotation, or log level filtering), I plan to integrate Winston — a versatile and widely-used logging library in Node.js.
-     Development: Shows detailed logs including debug, info, warn, and error levels for easier debugging and testing.
+   In the future, if more advanced and customizable logging is needed (e.g., file transport, log rotation, or log level filtering), I plan to integrate Winston — a versatile and widely-used logging library in Node.js.
+   
+   Development: Shows detailed logs including debug, info, warn, and error levels for easier debugging and testing.
 
-     Production: Restricts logs to only essential levels — info, warn, and error — to maintain cleaner output and better performance.
+   Production: Restricts logs to only essential levels — info, warn, and error — to maintain cleaner output and better performance.
   
    ![image](https://github.com/user-attachments/assets/f4145658-bce0-4f68-809b-97cf9b3d46e8)
 
@@ -305,6 +355,16 @@ The project implements the three pillars of observability:
    - Error rate monitoring
    - Request count metrics
 
+
+   All metrics are exposed via the /metrics endpoint and collected using the Prometheus client library to monitor API performance and reliability.
+   
+   The application measures how long it takes to process each Roman numeral conversion request to  help monitor performance and identify any bottlenecks in the backend.
+
+   All errors encountered during request processing are properly logged along with the request duration. This makes it easier to trace issues and maintain system reliability.
+
+   The requestCount counter tracks the total number of conversion requests received to provide insights into the API usage patterns and overall traffic.
+
+
    ![image](https://github.com/user-attachments/assets/b674e473-e8f6-4256-81d4-7c2a1783c59c)
 
 
@@ -312,9 +372,16 @@ The project implements the three pillars of observability:
    - Request tracing
    - Performance monitoring
    - Error correlation
+
+   
+   Traces are collected using OpenTelemetry and visualized through Jaeger, which runs as a container. The Jaeger UI is accessible at `http://localhost:16686`, offering a clear view of spans, timelines, and performance metrics for each request.
   
-     This is implemented using OpenTelemetry and the Jaeger container, port 16686 is exposed to see the insights:
-  
+   Each incoming request is traced end-to-end using OpenTelemetry, providing detailed insights into how requests are processed across different parts of the system.
+
+   Traces include timing data for each operation, helping identify latency hotspots and optimize the performance of the API.
+
+   Errors are automatically captured within trace data, making it easier to pinpoint where and why failures occur in a request's lifecycle.
+     
    ![image](https://github.com/user-attachments/assets/2abe8ed4-b7e7-4368-97e6-2c3f65ca0ed4)
 
 
@@ -325,28 +392,134 @@ To demonstrate automated documentation generation using JSDoc comments, I integr
 Maintaining documentation manually can quickly become outdated and hard to scale, especially as the codebase grows. By using TypeDoc, documentation stays in sync with the code, reducing maintenance overhead and improving developer experience.
 
 1. To create a basic documentation:
-      ```bash
-      cd backend
-      npm run docs
-      ```
+```bash
+   cd backend
+   npm run docs
+```
       or
-      ```bash
-      cd backend
-      npm run docs:build
-      ```
+```bash
+   cd backend
+   npm run docs:build
+```
 2. To clean and build again:
-      ```bash
-      cd backend
-      npm run docs:clean
-      npm run docs:build
-      ```
+```bash
+   cd backend
+   npm run docs:clean
+   npm run docs:build
+```
       
    Generates `index.html` file in the /docs folder
 
 
-For more information about the code structure, refer [roman-numeral-conversion](./roman-numeral-conversion)
+## Tech Stack Insights
 
-## Technologies Used
+### Backend Technologies
+
+1. **Express.js**:
+   - Lightweight and fast
+   - Excellent TypeScript support
+   - Large ecosystem of middleware
+   - Easy to containerize
+
+2. **TypeScript**:
+   - Static type checking
+   - Improved developer experience
+   - Better code documentation
+   - Enhanced IDE support
+
+3. **Node.js Dependencies**:
+   - **cors**: Cross-origin resource sharing enablement
+   - **dotenv**: Environment variable management
+   - **prom-client**: Prometheus metrics collection and exposition
+
+4. **Observability Stack**:
+   - **OpenTelemetry**: Distributed tracing implementation
+     - `@opentelemetry/sdk-node`: Core SDK for Node.js
+     - `@opentelemetry/auto-instrumentations-node`: Automatic instrumentation for common Node.js libraries
+     - `@opentelemetry/exporter-trace-otlp-http`: Exports traces to Jaeger
+   - **Jaeger**: Distributed tracing visualization and analysis
+   - **Prometheus** (via prom-client): Metrics collection
+
+5. **Development Tools**:
+   - **Jest**: Testing framework with snapshot testing
+   - **ESLint**: Code quality and style enforcement
+   - **Nodemon**: Development server with hot reloading
+   - **TypeDoc**: Documentation generation
+   - **ts-node**: TypeScript execution environment
+   - **rimraf**: Cross-platform directory cleanup utility
+   - **cross-env**: Cross-platform environment variable setting
+
+### Frontend Technologies
+
+1. **Adobe React Spectrum**:
+   - Built-in accessibility features
+   - Comprehensive component library
+   - Built-in theming support
+   - Professional design system
+   - Active maintenance and support
+
+2. **React**:
+   - Component-based architecture
+   - Virtual DOM for optimized rendering
+   - Extensive ecosystem
+   - Declarative programming model
+
+3. **Vite**:
+   - Fast development server
+   - Optimized production builds
+   - Excellent TypeScript support
+   - Modern build tooling
+
+4. **TypeScript**:
+   - Type safety
+   - Enhanced developer experience
+   - Better IDE integration
+   - Improved code maintainability
+
+5. **HTTP Client**:
+   - **Axios**: Feature-rich HTTP client with promise support, request/response interception, and broad browser compatibility
+
+6. **Testing Tools**:
+   - **Vitest**: Fast, Vite-native testing framework
+   - **Testing Library**: User-centric testing utilities
+   - **Jest DOM**: DOM testing assertions
+
+7. **Build and Quality Tools**:
+   - **ESLint**: Static code analysis
+   - **Terser**: JavaScript minification
+   - **TypeScript**: Static type checking
+
+### Infrastructure
+
+1. **Docker**:
+   - Containerization for consistent environments
+   - Easy deployment and scaling
+   - Isolation of services
+   - Simplified dependency management
+
+2. **Docker Compose**:
+   - Multi-container orchestration
+   - Environment configuration
+   - Network management
+   - Development-to-production consistency
+
+3. **Nginx**:
+   - High-performance web server
+   - Static file serving for frontend
+   - Proxy capabilities
+   - Lightweight and efficient
+
+
+## Accessibility
+
+The UI is built with accessibility in mind:
+- ARIA labels for all interactive elements
+- Keyboard navigation support
+- Screen reader compatibility
+- High contrast support through light/dark mode
+
+
+## References
 
 ### Backend
 - [Roman numerals](https://en.wikipedia.org/wiki/Roman_numerals) - Roman numerals
@@ -363,43 +536,11 @@ For more information about the code structure, refer [roman-numeral-conversion](
 - [React Spectrum](https://react-spectrum.adobe.com/) - UI components
 - [Vite](https://vitejs.dev/) - Build tool and development server
 
-## Dependency Selection Reasoning
-
-1. **Express.js**:
-   - Lightweight and fast
-   - Excellent TypeScript support
-   - Large ecosystem of middleware
-   - Easy to containerize
-
-2. **Adobe React Spectrum**:
-   - Built-in accessibility features
-   - Comprehensive component library
-   - Built-in theming support
-   - Professional design system
-   - Active maintenance and support
-
-3. **Winston**:
-   - Structured logging capabilities
-   - Multiple transport options
-   - Easy integration with monitoring tools
-   - Production-ready features
-
-4. **Vite**:
-   - Fast development server
-   - Optimized production builds
-   - Excellent TypeScript support
-   - Modern build tooling
-
-## Accessibility
-
-The UI is built with accessibility in mind:
-- ARIA labels for all interactive elements
-- Keyboard navigation support
-- Screen reader compatibility
-- High contrast support through light/dark mode
 
 ## FAQs
 
 1. Why is the `.env.example` file needed?
-   - To simulate a production-ready setup, I’ve utilized environment variables in the implementation. Although the .env file contains no sensitive information, only example files (.env.example, .env.production.example) are included in the repository, as it's best practice to avoid committing actual .env files to GitHub or any public platforms.
+   - To simulate a production-ready setup, I've utilized environment variables in the implementation. Although the .env file contains no sensitive information, only example files (.env.example, .env.production.example) are included in the repository, as it's best practice to avoid committing actual .env files to GitHub or any public platforms.
+
+
 
